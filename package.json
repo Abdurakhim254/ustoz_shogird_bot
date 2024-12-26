@@ -1,0 +1,20 @@
+{
+  "name": "ustoz_shogird_bot",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "node --watch main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@grammyjs/conversations": "^1.2.0",
+    "dotenv": "^16.4.7",
+    "grammy": "^1.33.0",
+    "mongoose": "^8.9.2"
+  }
+}
