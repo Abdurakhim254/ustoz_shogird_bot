@@ -1,4 +1,4 @@
-import { Bot, session, Keyboard } from "grammy";
+import { Bot, session, Keyboard, InlineKeyboard } from "grammy";
 import { User } from "../database/index.js";
 import dotenv from "dotenv";
 import { Jobkeyboard } from "../keyboards/job.keyboard.js";
@@ -6,7 +6,8 @@ import { conversations, createConversation } from "@grammyjs/conversations";
 
 dotenv.config();
 const token = process.env.BOT_TOKEN;
-let check=false
+
+
 
 export const bot = new Bot(token);
 
@@ -84,15 +85,15 @@ async function greeting(conversation, ctx) {
         object.familyasi=message.text.split(" ")[1]
       }else if (count==1){
         object.texnologiya=message.text
-      }else if(count==3){
+      }else if(count==2){
         object.aloqa=message.text
-      }else if(count==4){
+      }else if(count==3){
         object.hudud=message.text
-      }else if(count==5){
+      }else if(count==4){
         object.narxi=message.text
-      }else if(count==6){
+      }else if(count==5){
         object.kasbi=message.text
-      }else if(count==7){
+      }else if(count==6){
         object.murojaat_vaqti=message.text
       }
 
@@ -120,29 +121,41 @@ async function greeting(conversation, ctx) {
     const user=ctx.update.message?.from;
     const result=await User.findOne({user_id:user.id})
     
-    const shablon=`${ctx.message.text}:\n\n
-    🏅 E'lon turi    : ${object.elonturi}\n
-    📚 Texnologiya : ${object.texnologiya}\n
-    🇺🇿  Telegram   : @${result.username}\n
-    📞  Aloqa        : ${object.aloqa}\n
-    🌐 Hudud        : ${object.hudud}\n
-    💰 Narxi         : ${object.narxi}\n
-    👨🏻‍💻 Kasbi         : ${object.kasbi}\n
-🕰 Murojaat qilish vaqti: ${object.murojaat_vaqti}\n
-    🔎 Maqsad     : ${object.murojaat_vaqti}\n
-
+    const shablon=`${ctx.message.text}:\n
+🏅 E'lon turi     : ${object.elonturi}
+📚 Texnologiya    : ${object.texnologiya}
+🇺🇿  Telegram       : @${result.username}
+📞  Aloqa         : ${object.aloqa}
+🌐 Hudud          : ${object.hudud}
+💰 Narxi          : ${object.narxi}
+👨🏻‍💻 Kasbi          : ${object.kasbi}
+🕰 Murojaat qilish vaqti  : ${object.murojaat_vaqti}
+🔎 Maqsad     : ${object.murojaat_vaqti}
 
     #${object.tag}
-
     `
-    await ctx.reply(shablon)
+
+    const newbutton=new InlineKeyboard().text("Tasdiqlash ✅","tasdiq").text("Tahrirlash ✏️","tahrir")
+
+    await ctx.reply(shablon,{reply_markup:newbutton})
   }
 
+bot.callbackQuery("tasdiq",async(ctx)=>{
+  await ctx.reply("Salom")
   
+  await ctx.reply(ctx.message)
+})
+
+bot.callbackQuery("tahrir",async(ctx)=>{
+  const message="Quyidagi knopkalardan birini bosing ✅ "
+  await ctx.reply(message,{reply_markup:Jobkeyboard})
+})
+
+
 bot.hears("Sherik kerak", async (ctx) => {
   const message =
     "Sherik topish uchun ariza berish.\nHozir sizga birnecha savollar beriladi.\nHar biriga javob bering.\nOxirida agar hammasi to`g`ri bo`lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.";
-  await ctx.reply(message);
+  await ctx.reply(message,{reply_markup:{remove_keyboard:true}});
   await ctx.conversation.enter("greeting");
 });
 
@@ -150,14 +163,14 @@ bot.hears("Ish joyi kerak", async (ctx) => {
   const message =
     "Ish joyi uchun topish uchun ariza berish.\nHozir sizga birnecha savollar beriladi.\nHar biriga javob bering.\nOxirida agar hammasi to`g`ri bo`lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.";
 
-  await ctx.reply(message);
+  await ctx.reply(message,{reply_markup:{remove_keyboard:true}});
   await ctx.conversation.enter("greeting");
 });
 bot.hears("Hodim kerak", async (ctx) => {
   const message =
     "Hodim topish uchun ariza berish.\nHozir sizga birnecha savollar beriladi.\nHar biriga javob bering.\nOxirida agar hammasi to`g`ri bo`lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.";
 
-  await ctx.reply(message);
+  await ctx.reply(message,{reply_markup:{remove_keyboard:true}});
   await ctx.conversation.enter("greeting");
 });
 
@@ -165,7 +178,7 @@ bot.hears("Ustoz kerak", async (ctx) => {
   const message =
     "Ustoz topish uchun ariza berish.\nHozir sizga birnecha savollar beriladi.\nHar biriga javob bering.\nOxirida agar hammasi to`g`ri bo`lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.";
 
-  await ctx.reply(message);
+  await ctx.reply(message,{reply_markup:{remove_keyboard:true}});
   await ctx.conversation.enter("greeting");
 });
 
@@ -173,5 +186,8 @@ bot.hears("Ustoz kerak", async (ctx) => {
 bot.hears("Shogird kerak", async (ctx) => {
   const message =
     "Shogird topish uchun ariza berish.\nHozir sizga birnecha savollar beriladi.\nHar biriga javob bering.\nOxirida agar hammasi to`g`ri bo`lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.";
-  await ctx.reply(ctx.msg.text);
+  await ctx.reply(message,{reply_markup:{remove_keyboard:true}});
+  await ctx.conversation.enter("greeting");
+
 });
+
