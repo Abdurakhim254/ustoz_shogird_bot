@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "node --watch main.js"
+    "start:dev": "node --watch main.js",
+    "prod":"pm2 restart ustoz_shogird_bot"
   },
   "keywords": [],
   "author": "",
