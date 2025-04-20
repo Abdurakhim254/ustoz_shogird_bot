@@ -54,7 +54,10 @@ bot.on("message:contact", async (ctx) => {
   }
 });
 
+
+
 bot.callbackQuery("addPost", async (ctx) => {
+
   await ctx.reply(MAIN_MESSAGES.ToStartTypes, {
     reply_markup: Jobkeyboard,
   });
@@ -79,3 +82,8 @@ bot.callbackQuery("ustoz", async (ctx) => {
 bot.callbackQuery("shogird", async (ctx) => {
   await ctx.scenes.enter("shogird");
 });
+
+
+bot.on("callback_query:data",async(ctx)=>{
+  ctx.reply("data")
+})

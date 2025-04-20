@@ -4,6 +4,7 @@ export const IShObj={
     theme:"Ish joyi kerak:",
 
     ariza:`Ish joyi topish uchun ariza berish
+
     Hozir sizga birnecha savollar beriladi. 
     Har biriga javob bering. 
     Oxirida agar hammasi to'g'ri bo'lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.`,
