@@ -136,6 +136,11 @@ Sherikscene.wait("last-middleware").on("message:text", async (ctx) => {
 
 })
 
+
+
+
+
+
 Sherikscene.wait("javob").on("message:text", async (ctx) => {
  const text=ctx.message.text.toLocaleLowerCase()
  if(text==="ha"){
