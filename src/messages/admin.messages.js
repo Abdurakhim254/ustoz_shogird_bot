@@ -1,1 +1,0 @@
-export const FORBIDDENMESSAGE="Sizga bu buyrug' orqali ishlashga huquqingiz yoq!!!"
