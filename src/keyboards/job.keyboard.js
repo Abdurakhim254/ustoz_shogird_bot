@@ -1,9 +1,9 @@
-import { Keyboard } from "grammy";
+import { InlineKeyboard} from "grammy";
 
-export const Jobkeyboard = new Keyboard()
-  .text("Sherik kerak").resized()
-  .text("Ish joyi kerak").resized()
-  .text("Hodim kerak").resized()
-  .text("Ustoz kerak").resized()
+export const Jobkeyboard = new InlineKeyboard()
+  .text("Sherik kerak 🙋","sherik")
+  .text("Ish joyi kerak 🏢","ish")
+  .text("Hodim kerak 🧑🏼‍💻","hodim")
+  .text("Ustoz kerak 👨‍🏫","ustoz")
   .row()
-  .text("Shogird kerak");
+  .text("Shogird kerak 🧑‍⚕️","shogird");
