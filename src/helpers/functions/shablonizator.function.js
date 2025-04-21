@@ -2,7 +2,7 @@ import { getUser } from "./index.js"
 
 export const Shablonizator=async(Messages,ctx)=>{
     const user=await getUser(ctx.message.from.id);
-    return `   ${Messages.theme}
+    const text = `   ${Messages.theme}
       
     👨‍💼 Xodim: ${ctx.session.name}
     🕑 Yosh: ${ctx.session.age}
@@ -16,6 +16,6 @@ export const Shablonizator=async(Messages,ctx)=>{
     🔎 Maqsad: ${ctx.session.maqsad}
     
     ${Messages.tag} #${ctx.session.hudud}`
-    
+    return text
 
 }
