@@ -55,7 +55,6 @@ bot.on("message:contact", async (ctx) => {
       reply_markup: Addpost,
     });
     ctx.session.messageIds.push(message.message_id)
-    await messageDeleter(ctx.session.messageIds)
   } catch (error) {
     await ctx.reply(error.message);
   }
@@ -69,6 +68,7 @@ bot.callbackQuery("addPost", async (ctx) => {
     reply_markup: Jobkeyboard,
   });
   ctx.session.messageIds.push(message.message_id)
+  await messageDeleter(ctx);
 });
 
 bot.callbackQuery("sherik", async (ctx) => {
