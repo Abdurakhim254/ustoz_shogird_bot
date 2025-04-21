@@ -103,11 +103,10 @@ Ishscene.wait("get-maqsad").on("message:text", async (ctx) => {
 
 
 Ishscene.wait("last-middleware").on("message:text", async (ctx) => {
-    const user=await getUser(ctx.message.from.id);
     if(ctx.message.text){
         ctx.session.maqsad = ctx.message.text;
 
-        const shablon=await Shablonizator(IShSceneMessages,user)
+        const shablon=await Shablonizator(IShSceneMessages,ctx)
         await ctx.reply(shablon,{
           reply_markup:UniversalKeyboard
         });

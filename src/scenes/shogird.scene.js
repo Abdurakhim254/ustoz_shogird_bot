@@ -114,7 +114,7 @@ Shogirdscene.wait("last-middleware").on("message:text", async (ctx) => {
     if(ctx.message.text){
         ctx.session.maqsad = ctx.message.text;
 
-        const shablon=await Shablonizator(ShogirdSceneMessages,user)
+        const shablon=await Shablonizator(ShogirdSceneMessages,ctx)
         await ctx.reply(shablon,{
           reply_markup:UniversalKeyboard
         });
