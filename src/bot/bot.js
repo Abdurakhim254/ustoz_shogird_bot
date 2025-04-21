@@ -19,7 +19,7 @@ bot.command("start", async (ctx) => {
   const id = ctx.update.message.from.id;
   ctx.session.chatId=ctx.chat?.id
   ctx.session.messageIds=[]
-  const result = await User.findOne({ user_id: id });
+  const result = await getUser(id);
   if (!result) {
     const message=await ctx.reply(MAIN_MESSAGES.AskContact, { reply_markup: getcontact });
     ctx.session.messageIds.push(message.message_id)
@@ -40,7 +40,6 @@ bot.command("admin", async (ctx) => {
 bot.on("message:contact", async (ctx) => {
   try {
     const user = ctx.update.message?.from;
-    ctx.message.from.first_name
     const result =await getUser(user.id)
     if (!result) {
       await CreateUser(ctx);
