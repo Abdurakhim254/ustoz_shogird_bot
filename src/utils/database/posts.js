@@ -5,6 +5,10 @@ import { APPLICATION } from "../../config/index.js";
 dotenv.config();
 
 const postSchema =new mongoose.Schema({
+  user_id:{
+    type:Number,
+    required:true
+  },
   name:{
     type:String,
     required:true,

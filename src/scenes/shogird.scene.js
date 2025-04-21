@@ -3,10 +3,12 @@ import { UniversalKeyboard } from '../keyboards/index.js';
 import { ShogirdSceneMessages, SomeNeccessaryMessages } from '../messages/index.js';
 import { uzbPhoneRegex } from '../utils/constants/index.js';
 import { Shablonizator } from '../helpers/functions/index.js';
+import { APPLICATION } from '../config/index.js';
 
 
 export const Shogirdscene=new Scene("shogird")
 
+const ADMIN_ID=APPLICATION.admin_id
 
 
 
@@ -124,6 +126,19 @@ Shogirdscene.wait("last-middleware").on("message:text", async (ctx) => {
 Shogirdscene.wait("javob").on("message:text", async (ctx) => {
     const text=ctx.message.text.toLocaleLowerCase()
     if(text===SomeNeccessaryMessages.yes){
+        await createPost(
+            ctx.message.from.id,
+            ctx.session.name,
+            ctx.session.age,
+            ctx.session.texnologiya,
+            ctx.session.aloqa,
+            ctx.session.hudud,
+            ctx.session.narx,
+            ctx.session.kasb,
+            ctx.session.muroojaat_vaqti,
+            ctx.session.maqsad
+        )
+        await ctx.api.sendMessage(ADMIN_ID,SomeNeccessaryMessages.notification)
        await ctx.reply(SomeNeccessaryMessages.messageGood)
     }else if(text===SomeNeccessaryMessages.no){
        await ctx.reply(SomeNeccessaryMessages.messageBad)

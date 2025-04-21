@@ -18,7 +18,7 @@ Adminscene.step(async(ctx)=>{
 })
 
 
-Adminscene.wait("start").on("message:text",async(ctx)=>{
+Adminscene.wait("start").on("callback_query:data",async(ctx)=>{
         const text=ctx.message.text.toLocaleLowerCase()
         if(text=="notify"){
             await ctx.reply(text)

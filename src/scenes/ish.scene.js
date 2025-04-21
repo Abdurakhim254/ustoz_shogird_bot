@@ -3,8 +3,11 @@ import { IShSceneMessages, SomeNeccessaryMessages } from "../messages/index.js";
 import { uzbPhoneRegex, viloyatlar } from "../utils/constants/index.js";
 import { UniversalKeyboard } from "../keyboards/index.js";
 import { Shablonizator } from "../helpers/functions/index.js";
+import { APPLICATION } from "../config/index.js";
 
 export const Ishscene = new Scene("Ish");
+const ADMIN_ID=APPLICATION.admin_id
+
 
 Ishscene.step(async (ctx) => {
   
@@ -120,6 +123,19 @@ Ishscene.wait("last-middleware").on("message:text", async (ctx) => {
 Ishscene.wait("javob").on("message:text", async (ctx) => {
     const text=ctx.message.text.toLocaleLowerCase()
     if(text===SomeNeccessaryMessages.yes){
+        await createPost(
+            ctx.message.from.id,
+            ctx.session.name,
+            ctx.session.age,
+            ctx.session.texnologiya,
+            ctx.session.aloqa,
+            ctx.session.hudud,
+            ctx.session.narx,
+            ctx.session.kasb,
+            ctx.session.muroojaat_vaqti,
+            ctx.session.maqsad
+        )
+        await ctx.api.sendMessage(ADMIN_ID,SomeNeccessaryMessages.notification)
        await ctx.reply(SomeNeccessaryMessages.messageGood)
     }else if(text===SomeNeccessaryMessages.no){
        ctx.reply(SomeNeccessaryMessages.messageBad)
