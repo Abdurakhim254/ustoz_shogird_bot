@@ -50,7 +50,11 @@ const postSchema =new mongoose.Schema({
     default:false
   }
 
-});
+},
+{
+  timestamps:true
+}
+);
 
 await mongoose.connect(APPLICATION.url);
 
