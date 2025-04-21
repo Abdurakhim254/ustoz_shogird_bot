@@ -34,7 +34,7 @@ Sherikscene.wait("get-texnologiya").on("message:text", async (ctx) => {
       await ctx.reply(SherikSceneMessages.texnologiya);
       ctx.scene.resume();
   }else{
-      await ctx.reply(IShSceneMessages.age);
+      await ctx.reply(SherikSceneMessages.age);
   }
 });
 
@@ -90,7 +90,7 @@ Sherikscene.wait("get-muroojaat").on("message:text", async (ctx) => {
       ctx.scene.resume();
   }else{
 
-      await ctx.reply(IShSceneMessages.kasb);
+      await ctx.reply(SherikSceneMessages.kasb);
   }
 });
 

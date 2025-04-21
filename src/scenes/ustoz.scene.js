@@ -131,7 +131,7 @@ Ustozscene.wait("last-middleware").on("message:text", async (ctx) => {
         });
         ctx.scene.resume();
     }else{
-        await ctx.reply(IShSceneMessages.maqsad);
+        await ctx.reply(UstozSceneMessages.maqsad);
     }
 
 })

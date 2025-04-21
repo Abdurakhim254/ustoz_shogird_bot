@@ -45,7 +45,7 @@ HodimScene.wait("get-aloqa").on("message:text", async (ctx) => {
       ctx.scene.resume();
   }else{
 
-      await ctx.reply(IShSceneMessages.aloqa);
+      await ctx.reply(HodimSceneMessages.texnologiya);
     }
 });
 
@@ -112,7 +112,7 @@ HodimScene.wait("last-middleware").on("message:text", async (ctx) => {
     if(ctx.message.text){
         ctx.session.maqsad = ctx.message.text;
 
-        const shablon=`${IShObj.theme}
+        const shablon=`${HodimSceneMessages.theme}
       
         👨‍💼 Xodim: ${ctx.session.name}
         🕑 Yosh: ${ctx.session.age}

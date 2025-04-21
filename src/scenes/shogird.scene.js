@@ -114,7 +114,7 @@ Shogirdscene.wait("last-middleware").on("message:text", async (ctx) => {
     if(ctx.message.text){
         ctx.session.maqsad = ctx.message.text;
 
-        const shablon=`${IShObj.theme}
+        const shablon=`${ShogirdSceneMessages.theme}
       
         👨‍💼 Xodim: ${ctx.session.name}
         🕑 Yosh: ${ctx.session.age}
