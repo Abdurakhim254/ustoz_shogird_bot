@@ -16,4 +16,4 @@ const usersSchema = new mongoose.Schema(
 );
 
 await mongoose.connect(APPLICATION.url);
-export const User = mongoose.model("ustoz", usersSchema);
+export const User = mongoose.model("users", usersSchema);
