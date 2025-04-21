@@ -9,6 +9,8 @@ import { Sherikscene } from './sherik.scene.js'
 
 
 
+
+
 export const scenes=new ScenesComposer(
     HodimScene,
     Adminscene,
