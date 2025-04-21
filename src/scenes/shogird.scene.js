@@ -8,10 +8,6 @@ import { Shablonizator } from '../helpers/functions/index.js';
 export const Shogirdscene=new Scene("shogird")
 
 
-Shogirdscene.step(async(ctx)=>{
-    await ctx.reply("shogird")
-})
-
 
 
 Shogirdscene.step(async (ctx) => {
@@ -130,7 +126,7 @@ Shogirdscene.wait("javob").on("message:text", async (ctx) => {
     if(text===SomeNeccessaryMessages.yes){
        await ctx.reply(SomeNeccessaryMessages.messageGood)
     }else if(text===SomeNeccessaryMessages.no){
-       ctx.reply(SomeNeccessaryMessages.messageBad)
+       await ctx.reply(SomeNeccessaryMessages.messageBad)
     }
     ctx.scene.exit()
 });

@@ -2,14 +2,10 @@ import { Scene } from 'grammy-scenes'
 import { UniversalKeyboard } from '../keyboards/index.js';
 import { SomeNeccessaryMessages, UstozSceneMessages } from '../messages/index.js';
 import { uzbPhoneRegex } from '../utils/constants/index.js';
-import { Shablonizator } from '../helpers/functions/shablonizator.function.js';
+import { Shablonizator } from '../helpers/functions/index.js';
 
 
 export const Ustozscene=new Scene("ustoz")
-
-Ustozscene.step(async(ctx)=>{
-    await ctx.reply("ustoz")
-})
 
 
 Ustozscene.step(async (ctx) => {
@@ -129,7 +125,7 @@ Ustozscene.wait("javob").on("message:text", async (ctx) => {
  if(text===SomeNeccessaryMessages.yes){
     await ctx.reply(SomeNeccessaryMessages.messageGood)
  }else if(text===SomeNeccessaryMessages.no){
-    ctx.reply(SomeNeccessaryMessages.messageBad)
+   await ctx.reply(SomeNeccessaryMessages.messageBad)
  }
     ctx.scene.exit()
 });

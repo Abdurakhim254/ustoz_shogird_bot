@@ -1,20 +1,47 @@
-// import mongoose from "mongoose";
-// import dotenv from "dotenv";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-// dotenv.config();
+dotenv.config();
 
-// const postSchema =new  mongoose.Schema(
-//   {
-//     u: {
-//       type: Number,
-//       required: true,
-//     },
-//     phone_number: { type: Number, required: true, unique: true },
-//     first_name: { type: String, required: true },
-//     username: { type: String, required: true },
-//   },
-//   { timestamps: true }
-// );
+const postSchema =new mongoose.Schema({
+  name:{
+    type:String,
+    required:true,
+  },
+  age:{
+    type:Number,
+    required:true
+  },
+  texnologiya:{
+    type:String,
+    required:true,
+  },
+  aloqa:{
+    type:String,
+    required:true,
+  },
+  hudud:{
+    type:String,
+    required:true
+  },
+  narx:{
+    type:String,
+    required:true
+  },
+  kasb:{
+    type:String,
+    required:true
+  },
+  murojaat_vaqti:{
+    type:String,
+    required:true
+  },
+  maqsad:{
+    type:String,
+    required:true
+  }
 
-// await mongoose.connect(process.env.MONGO_URI);
-// export const User = mongoose.model("ustoz", postSchema);
+});
+
+await mongoose.connect(process.env.MONGO_URI);
+export const Posts = mongoose.model("posts", postSchema);
