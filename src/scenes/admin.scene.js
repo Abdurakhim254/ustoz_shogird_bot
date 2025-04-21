@@ -1,5 +1,4 @@
 import { Scene } from 'grammy-scenes'
-import dotenv from "dotenv"
 import { AdminSceneMessages } from '../messages/index.js'
 import { APPLICATION } from '../config/index.js'
 import { Adminkeyboard } from '../keyboards/index.js'
@@ -15,7 +14,7 @@ Adminscene.step(async(ctx)=>{
     await ctx.reply(AdminSceneMessages.Panel,{
         reply_markup:Adminkeyboard
     })
-    await ctx.scene.resume()
+    ctx.scene.resume()
 })
 
 

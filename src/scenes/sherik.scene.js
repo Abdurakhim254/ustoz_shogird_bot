@@ -1,6 +1,6 @@
 import { Scene } from 'grammy-scenes'
 import { UniversalKeyboard } from '../keyboards/index.js';
-import { SherikSceneMessages } from '../messages/index.js';
+import { SherikSceneMessages, SomeNeccessaryMessages } from '../messages/index.js';
 import { uzbPhoneRegex } from '../utils/constants/index.js';
 import { Shablonizator } from '../helpers/functions/index.js';
 
@@ -129,12 +129,11 @@ Sherikscene.wait("last-middleware").on("message:text", async (ctx) => {
 
 
 Sherikscene.wait("javob").on("message:text", async (ctx) => {
- const text=ctx.message.text.toLocaleLowerCase()
- if(text==="ha"){
-    ctx.reply("ha")
- }else if(text==="yoq"){
-    ctx.reply("yoq")
- }else{
-    ctx.reply("orta")
- }
+    const text=ctx.message.text.toLocaleLowerCase()
+    if(text===SomeNeccessaryMessages.yes){
+       await ctx.reply(SomeNeccessaryMessages.messageGood)
+    }else if(text===SomeNeccessaryMessages.no){
+       ctx.reply(SomeNeccessaryMessages.messageBad)
+    }
+       ctx.scene.exit()
 });

@@ -1,6 +1,6 @@
 import { Scene } from 'grammy-scenes'
 import { UniversalKeyboard } from '../keyboards/index.js';
-import { UstozSceneMessages } from '../messages/index.js';
+import { SomeNeccessaryMessages, UstozSceneMessages } from '../messages/index.js';
 import { uzbPhoneRegex } from '../utils/constants/index.js';
 import { Shablonizator } from '../helpers/functions/shablonizator.function.js';
 
@@ -126,11 +126,10 @@ Ustozscene.wait("last-middleware").on("message:text", async (ctx) => {
 
 Ustozscene.wait("javob").on("message:text", async (ctx) => {
  const text=ctx.message.text.toLocaleLowerCase()
- if(text==="ha"){
-    ctx.reply("ha")
- }else if(text==="yoq"){
-    ctx.reply("yoq")
- }else{
-    ctx.reply("orta")
+ if(text===SomeNeccessaryMessages.yes){
+    await ctx.reply(SomeNeccessaryMessages.messageGood)
+ }else if(text===SomeNeccessaryMessages.no){
+    ctx.reply(SomeNeccessaryMessages.messageBad)
  }
+    ctx.scene.exit()
 });

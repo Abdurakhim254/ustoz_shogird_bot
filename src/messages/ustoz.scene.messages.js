@@ -43,6 +43,6 @@ export const UstozSceneMessages={
 
     Maqsadingizni qisqacha yozib bering`,
 
-    tag:"#xodim"
+    tag:"#ustoz"
 }
 

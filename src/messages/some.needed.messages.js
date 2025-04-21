@@ -1,0 +1,8 @@
+
+
+export const SomeNeccessaryMessages={
+    yes:"ha",
+    no:"yoq",
+    messageGood:"Adminga Arizangiz yuborildi va qabul qilindi 24 yoki 48 soat ichida eloningiz kanalga yuboriladi.",
+    messageBad:"Ariza Bekor qilindi"
+}

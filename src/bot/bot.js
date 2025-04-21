@@ -18,18 +18,16 @@ bot.use(scenes);
 
 bot.command("start", async (ctx) => {
   const id = ctx.update.message.from.id;
-  ctx.session.messageIds=[]
   const result = await User.findOne({ user_id: id });
   if (!result) {
-    const message=await ctx.reply(MAIN_MESSAGES.AskContact, { reply_markup: getcontact });
-    ctx.session.messageIds.push(message.message_id)
+    await ctx.reply(MAIN_MESSAGES.AskContact, { reply_markup: getcontact });
+    
     return;
   }
 
- const message = await ctx.reply(MAIN_MESSAGES.ToStartAdd, {
+  await ctx.reply(MAIN_MESSAGES.ToStartAdd, {
     reply_markup: Addpost,
   });
-  ctx.session.messageIds.push(message.message_id)
 });
 
 bot.command("admin", async (ctx) => {
@@ -39,7 +37,6 @@ bot.command("admin", async (ctx) => {
 bot.on("message:contact", async (ctx) => {
   try {
     const contact = ctx.message.contact;
-    ctx.session.messageIds.push(ctx.update.message.message_id)
     const user = ctx.update.message?.from;
     const result = await User.findOne({ username: user.username });
     if (!result) {
@@ -51,10 +48,10 @@ bot.on("message:contact", async (ctx) => {
       });
     }
 
-    const message = await ctx.reply(MAIN_MESSAGES.successmessage, {
+     await ctx.reply(MAIN_MESSAGES.successmessage, {
       reply_markup: Addpost,
     });
-    ctx.session.messageIds.push(message.message_id)
+    
   } catch (error) {
     await ctx.reply(error.message);
   }
@@ -64,10 +61,10 @@ bot.on("message:contact", async (ctx) => {
 
 bot.callbackQuery("addPost", async (ctx) => {
 
-  const message = await ctx.reply(MAIN_MESSAGES.ToStartTypes, {
+  await ctx.reply(MAIN_MESSAGES.ToStartTypes, {
     reply_markup: Jobkeyboard,
   });
-  ctx.session.messageIds.push(message.message_id)
+  
   await messageDeleter(ctx);
 });
 

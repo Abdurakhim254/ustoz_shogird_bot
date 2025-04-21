@@ -1,5 +1,5 @@
 import { Scene } from "grammy-scenes";
-import { IShSceneMessages } from "../messages/index.js";
+import { IShSceneMessages, SomeNeccessaryMessages } from "../messages/index.js";
 import { uzbPhoneRegex, viloyatlar } from "../utils/constants/index.js";
 import { UniversalKeyboard } from "../keyboards/index.js";
 import { Shablonizator } from "../helpers/functions/index.js";
@@ -118,12 +118,11 @@ Ishscene.wait("last-middleware").on("message:text", async (ctx) => {
 })
 
 Ishscene.wait("javob").on("message:text", async (ctx) => {
- const text=ctx.message.text.toLocaleLowerCase()
- if(text==="ha"){
-    ctx.reply("ha")
- }else if(text==="yoq"){
-    ctx.reply("yoq")
- }else{
-    ctx.reply("orta")
- }
+    const text=ctx.message.text.toLocaleLowerCase()
+    if(text===SomeNeccessaryMessages.yes){
+       await ctx.reply(SomeNeccessaryMessages.messageGood)
+    }else if(text===SomeNeccessaryMessages.no){
+       ctx.reply(SomeNeccessaryMessages.messageBad)
+    }
+       ctx.scene.exit()
 });
