@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { APPLICATION } from "../../config/index.js";
 
 dotenv.config();
 
@@ -39,9 +40,14 @@ const postSchema =new mongoose.Schema({
   maqsad:{
     type:String,
     required:true
+  },
+  status:{
+    type:Boolean,
+    default:false
   }
 
 });
 
-await mongoose.connect(process.env.MONGO_URI);
+await mongoose.connect(APPLICATION.url);
+
 export const Posts = mongoose.model("posts", postSchema);

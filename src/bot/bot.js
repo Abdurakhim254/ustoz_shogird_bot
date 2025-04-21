@@ -60,10 +60,10 @@ bot.on("message:contact", async (ctx) => {
 
 bot.callbackQuery("addPost", async (ctx) => {
 
-  await ctx.reply(MAIN_MESSAGES.ToStartTypes, {
+ const message= await ctx.reply(MAIN_MESSAGES.ToStartTypes, {
     reply_markup: Jobkeyboard,
   });
-  
+  ctx.session.messageIds.push(message.message_id)
 });
 
 bot.callbackQuery("sherik", async (ctx) => {
