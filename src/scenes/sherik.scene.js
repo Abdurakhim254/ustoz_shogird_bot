@@ -2,6 +2,7 @@ import { Scene } from 'grammy-scenes'
 import { UniversalKeyboard } from '../keyboards/index.js';
 import { SherikSceneMessages } from '../messages/index.js';
 import { uzbPhoneRegex } from '../utils/constants/index.js';
+import { Shablonizator } from '../helpers/functions/index.js';
 
 
 export const Sherikscene=new Scene("sherik")
@@ -108,24 +109,10 @@ Sherikscene.wait("get-maqsad").on("message:text", async (ctx) => {
 
 
 Sherikscene.wait("last-middleware").on("message:text", async (ctx) => {
-    const user=await getUser(ctx.message.from.id);
     if(ctx.message.text){
         ctx.session.maqsad = ctx.message.text;
 
-        const shablon=`${IShObj.theme}
-      
-        👨‍💼 Xodim: ${ctx.session.name}
-        🕑 Yosh: ${ctx.session.age}
-        📚 Texnologiya: ${ctx.session.texnologiya} 
-        🇺🇿 Telegram: @${user.username}
-        📞 Aloqa: ${ctx.session.aloqa}
-        🌐 Hudud: ${ctx.session.hudud} 
-        💰 Narxi: ${ctx.session.narx}
-        👨🏻‍💻 Kasbi: ${ctx.session.kasb}
-        🕰 Murojaat qilish vaqti: ${ctx.session.muroojaat_vaqti} 
-        🔎 Maqsad: ${ctx.session.maqsad}
-        
-        #xodim #${ctx.session.hudud}`
+        const shablon=await Shablonizator(SherikSceneMessages,ctx)
         await ctx.reply(shablon,{
           reply_markup:UniversalKeyboard
         });

@@ -2,7 +2,7 @@ import { Scene } from "grammy-scenes";
 import { IShSceneMessages } from "../messages/index.js";
 import { uzbPhoneRegex, viloyatlar } from "../utils/constants/index.js";
 import { UniversalKeyboard } from "../keyboards/index.js";
-import { getUser } from "../helpers/functions/index.js";
+import { Shablonizator } from "../helpers/functions/index.js";
 
 export const Ishscene = new Scene("Ish");
 
@@ -107,20 +107,7 @@ Ishscene.wait("last-middleware").on("message:text", async (ctx) => {
     if(ctx.message.text){
         ctx.session.maqsad = ctx.message.text;
 
-        const shablon=`${IShSceneMessages.theme}
-      
-        👨‍💼 Xodim: ${ctx.session.name}
-        🕑 Yosh: ${ctx.session.age}
-        📚 Texnologiya: ${ctx.session.texnologiya} 
-        🇺🇿 Telegram: @${user.username}
-        📞 Aloqa: ${ctx.session.aloqa}
-        🌐 Hudud: ${ctx.session.hudud} 
-        💰 Narxi: ${ctx.session.narx}
-        👨🏻‍💻 Kasbi: ${ctx.session.kasb}
-        🕰 Murojaat qilish vaqti: ${ctx.session.muroojaat_vaqti} 
-        🔎 Maqsad: ${ctx.session.maqsad}
-        
-        #xodim #${ctx.session.hudud}`
+        const shablon=await Shablonizator(IShSceneMessages,user)
         await ctx.reply(shablon,{
           reply_markup:UniversalKeyboard
         });
