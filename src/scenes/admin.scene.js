@@ -40,7 +40,7 @@ Adminscene.wait("start").on("callback_query:data",async(ctx)=>{
 })
 
 
-AdminSceneMessages.wait("button-actions").on("callback_query:data",async(ctx)=>{
+Adminscene.wait("button-actions").on("callback_query:data",async(ctx)=>{
     const data = ctx.callbackQuery.data.toLowerCase();
     
     
