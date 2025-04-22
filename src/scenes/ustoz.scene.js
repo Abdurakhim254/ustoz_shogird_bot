@@ -112,9 +112,10 @@ Ustozscene.wait("last-middleware").on("message:text", async (ctx) => {
 
         const shablon=await Shablonizator(UstozSceneMessages,ctx)
 
-        await ctx.reply(shablon,{
+       await ctx.reply(shablon,{
             reply_markup:UniversalKeyboard
         });
+
         ctx.scene.resume();
     }else{
         await ctx.reply(UstozSceneMessages.maqsad);
