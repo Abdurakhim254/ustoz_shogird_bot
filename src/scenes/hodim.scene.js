@@ -2,7 +2,7 @@ import { Scene } from 'grammy-scenes'
 import { UniversalKeyboard } from '../keyboards/index.js';
 import { HodimSceneMessages, SomeNeccessaryMessages } from '../messages/index.js';
 import { uzbPhoneRegex } from '../utils/constants/index.js';
-import { Shablonizator,} from '../helpers/functions/index.js';
+import { Shablonizator, createPost,} from '../helpers/functions/index.js';
 import { APPLICATION } from '../config/index.js';
 
 

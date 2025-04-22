@@ -2,7 +2,7 @@ import { Scene } from "grammy-scenes";
 import { IShSceneMessages, SomeNeccessaryMessages } from "../messages/index.js";
 import { uzbPhoneRegex, viloyatlar } from "../utils/constants/index.js";
 import { UniversalKeyboard } from "../keyboards/index.js";
-import { Shablonizator } from "../helpers/functions/index.js";
+import { Shablonizator, createPost } from "../helpers/functions/index.js";
 import { APPLICATION } from "../config/index.js";
 
 export const Ishscene = new Scene("Ish");
