@@ -36,7 +36,23 @@ Adminscene.wait("start").on("callback_query:data",async(ctx)=>{
 
         }
 
-
-
         ctx.scene.resume()
 })
+
+
+AdminSceneMessages.wait("button-actions").on("callback_query:data",async(ctx)=>{
+    const data = ctx.callbackQuery.data.toLowerCase();
+    
+    
+    
+    if (data.startsWith("tasdiq_")) {
+        const id = data.split("_")[1];
+        await ctx.reply(`Tasdiqlandi: ${id}`);
+        await ctx.answerCallbackQuery("Post tasdiqlandi ✅");
+    
+      } else if (data.startsWith("bekor_")) {
+        const id = data.split("_")[1];
+        await ctx.reply(`Bekor qilindi: ${id}`);
+        await ctx.answerCallbackQuery("Post bekor qilindi ❌");
+      }
+    })
