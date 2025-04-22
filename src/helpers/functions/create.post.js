@@ -8,10 +8,11 @@ export const createPost = async (
   aloqa,
   hudud,
   narx,
+  kasb,
   maqsad,
   murojaat_vaqti,
   theme,
   tag
 ) => {
-  await Posts.create({user_id, name, age, texnologiya, aloqa, hudud, narx ,maqsad,murojaat_vaqti,theme,tag});
+  await Posts.create({user_id, name, age, texnologiya, aloqa, hudud, narx ,kasb,maqsad,murojaat_vaqti,theme,tag});
 };
