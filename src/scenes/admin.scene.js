@@ -47,11 +47,12 @@ Adminscene.wait("button-actions").on("callback_query:data",async(ctx)=>{
     const id = data.split("_")[1];
     
     
+    console.log(id);
     
     if (data.startsWith("tasdiq_")) {
         await updatePost(id);
         const post=await formatPosts(id)
-        await ctx.api.sendMessage(id,"Post tasdiqlandi ✅");
+        await ctx.api.sendMessage(channel,"Post tasdiqlandi ✅");
         await ctx.api.sendMessage(channel,post)
     
       } else if (data.startsWith("bekor_")) {
