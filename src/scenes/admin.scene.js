@@ -44,20 +44,24 @@ Adminscene.wait("start").on("callback_query:data",async(ctx)=>{
 
 Adminscene.wait("button-actions").on("callback_query:data",async(ctx)=>{
     const data = ctx.callbackQuery.data.toLowerCase();
-    const id = data.split("_")[1];
+    const id=""
     
     
 
     if (data.startsWith("tasdiq_")) {
+        id=data.split("_")[1];
         await updatePost(id);
         const post=await formatPosts(id)
         await ctx.api.sendMessage(channel,post)
     
       } else if (data.startsWith("bekor_")) {
+        id=data.split("_")[1];
+
         await deletePost(id);
         await ctx.api.sendMessage(id,"Post bekor qilindi ❌");
-      }
-
-      ctx.scene.exit()
+        
+    }
+    
+    ctx.scene.exit()
 
     })
