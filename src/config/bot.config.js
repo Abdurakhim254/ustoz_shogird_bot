@@ -7,5 +7,6 @@ export const APPLICATION={
     token:process.env.BOT_TOKEN,
     url:process.env.MONGO_URI,
     admin_id:process.env.ADMIN_ID,
-    port:process.env.PORT
+    port:process.env.PORT,
+    channel:process.env.ChANNEL_NAME
 }
