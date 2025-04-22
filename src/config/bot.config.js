@@ -8,5 +8,6 @@ export const APPLICATION={
     url:process.env.MONGO_URI,
     admin_id:process.env.ADMIN_ID,
     port:process.env.PORT,
-    channel:process.env.ChANNEL_NAME
+    channel:process.env.ChANNEL_NAME,
 }
+
