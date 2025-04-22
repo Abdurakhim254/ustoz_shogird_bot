@@ -1,8 +1,8 @@
 import { Scene } from 'grammy-scenes'
 import { AdminSceneMessages } from '../messages/index.js'
 import { APPLICATION } from '../config/index.js'
-import { Adminkeyboard } from '../keyboards/index.js'
-import { getPosts } from '../helpers/functions/index.js'
+import { Adminkeyboard, getKeyboard } from '../keyboards/index.js'
+import { formatPosts, getPosts } from '../helpers/functions/index.js'
 
 
 export const Adminscene=new Scene("admin")
@@ -28,8 +28,14 @@ Adminscene.wait("start").on("callback_query:data",async(ctx)=>{
             }
 
             for(const post of posts){
-                await ctx.reply(`@${post.user_id}\n${post.name}\n${post.age}\n${post.texnologiya}\n${post.aloqa}\n${post.hudud}\n${post.narx}\n${post.maqsad}\n${post.murojaat_vaqti}`)
+             await ctx.reply(formatPosts(post.user_id),{
+                reply_markup:getKeyboard(post.user_id)
+             })   
             }
 
         }
+
+
+
+        ctx.scene.resume()
 })

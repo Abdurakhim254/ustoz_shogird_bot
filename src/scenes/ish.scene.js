@@ -133,7 +133,9 @@ Ishscene.wait("javob").on("message:text", async (ctx) => {
             ctx.session.narx,
             ctx.session.kasb,
             ctx.session.muroojaat_vaqti,
-            ctx.session.maqsad
+            ctx.session.maqsad,
+            IShSceneMessages.theme,
+            IShSceneMessages.tag
         )
         await ctx.api.sendMessage(ADMIN_ID,SomeNeccessaryMessages.notification)
        await ctx.reply(SomeNeccessaryMessages.messageGood)

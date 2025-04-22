@@ -1,7 +1,7 @@
 import { Posts } from "../../utils/database/index.js";
 
 export const createPost = async (
-    user_id,
+  user_id,
   name,
   age,
   texnologiya,
@@ -9,7 +9,9 @@ export const createPost = async (
   hudud,
   narx,
   maqsad,
-  murojaat_vaqti
+  murojaat_vaqti,
+  theme,
+  tag
 ) => {
-  await Posts.create({user_id, name, age, texnologiya, aloqa, hudud, narx ,maqsad,murojaat_vaqti});
+  await Posts.create({user_id, name, age, texnologiya, aloqa, hudud, narx ,maqsad,murojaat_vaqti,theme,tag});
 };
