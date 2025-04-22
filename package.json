@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "node --watch main.js",
-    "prod":"pm2 restart ustoz_shogird_bot"
+    "prod": "pm2 restart ustoz_shogird_bot"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +19,6 @@
     "grammy": "^1.33.0",
     "grammy-scenes": "^10.2.0",
     "mongoose": "^8.9.2"
-  }
+  },
+  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
 }
