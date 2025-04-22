@@ -2,12 +2,18 @@ import { getUser } from "./index.js"
 
 export const Shablonizator=async(Messages,ctx)=>{
     const user=await getUser(ctx.message.from.id);
+    const contact=""
+    if(user.username!=undefined){
+        contact=`@${user.username}`
+    }else{
+        contact=user.phone_number
+    }
     const text = `   ${Messages.theme}
       
     👨‍💼 Xodim: ${ctx.session.name}
     🕑 Yosh: ${ctx.session.age}
     📚 Texnologiya: ${ctx.session.texnologiya} 
-    🇺🇿 Telegram: @${user.username?user.username:user.phone_number}
+    🇺🇿 Telegram: ${contact}
     📞 Aloqa: ${ctx.session.aloqa}
     🌐 Hudud: ${ctx.session.hudud} 
     💰 Narxi: ${ctx.session.narx}
