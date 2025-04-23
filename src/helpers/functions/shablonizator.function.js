@@ -3,7 +3,7 @@ import { getUser } from "./index.js"
 export const Shablonizator=async(Messages,ctx)=>{
     const user=await getUser(ctx.message.from.id);
     let contact=""
-    if(user.username!=undefined){
+    if(user.username){
         contact=`@${user.username}`
     }else{
         contact=user.phone_number

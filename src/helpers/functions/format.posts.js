@@ -4,7 +4,7 @@ export const formatPosts=async(id)=>{
     const post =await getPost(id)
     const user =await getUser(id)
     let contact=""
-    if(user.username!=undefined){
+    if(user.username){
       contact=`@${user.username}`
   }else{
       contact=user.phone_number
