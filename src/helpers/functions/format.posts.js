@@ -7,7 +7,7 @@ export const formatPosts=async(id)=>{
     if(user.username){
       contact=`@${user.username}`
   }else{
-      contact=user.phone_number
+      contact='+'+user.phone_number
   }
     const text = `   ${post.theme}
       

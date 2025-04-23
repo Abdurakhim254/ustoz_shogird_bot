@@ -6,7 +6,7 @@ export const Shablonizator=async(Messages,ctx)=>{
     if(user.username){
         contact=`@${user.username}`
     }else{
-        contact=user.phone_number
+        contact='+'+user.phone_number
     }
     const text = `   ${Messages.theme}
       

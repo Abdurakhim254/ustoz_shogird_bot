@@ -38,6 +38,7 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     }
 
     for (const post of posts) {
+      console.log(post);
       const Post = await formatPosts(post.user_id);
       await ctx.reply(Post, {
         reply_markup: getKeyboard(post.user_id),
