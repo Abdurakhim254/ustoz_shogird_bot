@@ -60,9 +60,10 @@ Adminscene.wait("button-actions").on("callback_query:data", async (ctx) => {
     await updatePost(id);
     const post = await formatPosts(id);
     await ctx.api.sendMessage(channel, post);
+    await ctx.api.sendMessage(APPLICATION.admin_id, "Post tasdiqlandi ✅");
   } else if (data.startsWith("bekor_")) {
     id = data.split("_")[1];
-
+    await ctx.api.sendMessage(APPLICATION.admin_id, "Post bekor qilindi ❌");
     const result=await deletePost(id);
     if(result){
         await ctx.api.sendMessage(id, "Post bekor qilindi ❌");
