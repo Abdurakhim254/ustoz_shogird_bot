@@ -26,7 +26,8 @@ Adminscene.wait("start").on("callback_query:data",async(ctx)=>{
         if(text=="notify"){
             const posts=await getPosts()
             if(posts.length===0){
-             await ctx.answerCallbackQuery(AdminSceneMessages.Noposts)   
+             await ctx.answerCallbackQuery(AdminSceneMessages.Noposts) 
+             return ctx.scene.exit()  
             }
 
             for(const post of posts){
