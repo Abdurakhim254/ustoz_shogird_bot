@@ -67,6 +67,7 @@ Adminscene.wait("button-actions").on("callback_query:data",async(ctx)=>{
         await ctx.reply(AdminSceneMessages.back,{
             reply_markup:backKeyboard
         })
+        ctx.scene.resume()
     })
     
 Adminscene.wait("back").on("callback_query:data",async(ctx)=>{
