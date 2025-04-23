@@ -1,7 +1,9 @@
+import { TypeEnum } from "../../utils/constants/index.js"
 import { getPost, getUser } from "./index.js"
 
+
 export const formatPosts=async(id)=>{
-    const post =await getPost(id)
+    const post =await getPost(id,TypeEnum.false)
     const user =await getUser(id)
     let contact=""
     if(user.username){

@@ -1,3 +1,4 @@
+import { TypeEnum } from "../../utils/constants/index.js";
 import { Posts } from "../../utils/database/index.js";
 import { getPost } from "./index.js";
 
@@ -10,7 +11,7 @@ export const updatePost=async(id)=>{
       );
     }
   export const deletePost = async (id) => {
-    const result = await getPost(id);
+    const result = await getPost(id,TypeEnum.true);
     if(result.status){
       return false
     }else{
