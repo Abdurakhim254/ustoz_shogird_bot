@@ -69,3 +69,12 @@ Adminscene.wait("button-actions").on("callback_query:data",async(ctx)=>{
         })
     })
     
+Adminscene.wait("back").on("callback_query:data",async(ctx)=>{
+    const data=ctx.callbackQuery.data.toLowerCase()
+    if(data=="back"){
+        await ctx.reply(AdminSceneMessages.success)
+        ctx.scene.exit()
+    }else{
+        await ctx.reply(AdminSceneMessages.back)    
+    }
+})
