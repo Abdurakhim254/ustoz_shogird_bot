@@ -63,21 +63,17 @@ Adminscene.wait("button-actions").on("callback_query:data", async (ctx) => {
   } else if (data.startsWith("bekor_")) {
     id = data.split("_")[1];
 
-    await deletePost(id);
-    await ctx.api.sendMessage(id, "Post bekor qilindi ❌");
-  }
-  await ctx.reply(AdminSceneMessages.back, {
-      reply_markup: backKeyboard,
-    });
-  ctx.scene.resume();
-});
-
-Adminscene.wait("back").on("callback_query:data", async (ctx) => {
-  const data = ctx.callbackQuery.data.toLowerCase();
-  if (data == "back") {
+    const result=await deletePost(id);
+    if(result){
+        await ctx.api.sendMessage(id, "Post bekor qilindi ❌");
+    }else{
+        await ctx.api.sendMessage(id,"Post bekor qilinmadi ❌");
+    }
+  }else if (data == "back") {
     await ctx.reply(AdminSceneMessages.success);
     ctx.scene.exit();
-  } else {
-    await ctx.reply(AdminSceneMessages.back);
   }
 });
+
+
+

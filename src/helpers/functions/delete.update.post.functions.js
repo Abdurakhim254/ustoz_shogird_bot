@@ -1,9 +1,7 @@
 import { Posts } from "../../utils/database/index.js";
+import { getPost } from "./index.js";
 
 
-export const deletePost = async (id) => {
-    await Posts.deleteOne({ user_id: id });
-};
 
 export const updatePost=async(id)=>{
     await Posts.updateOne(
@@ -11,3 +9,12 @@ export const updatePost=async(id)=>{
         { $set: { status: true } }
       );
     }
+  export const deletePost = async (id) => {
+    const result = await getPost(id);
+    if(result.status){
+      return false
+    }else{
+      await Posts.deleteOne({ user_id: id });
+      return true
+    }
+  };

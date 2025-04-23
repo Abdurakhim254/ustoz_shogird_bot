@@ -9,7 +9,7 @@ export const Adminkeyboard = new InlineKeyboard().text(
 
 
 export const getKeyboard = (id)=>{
-    return new InlineKeyboard().text("Tasdiqlash ✅",`tasdiq_${id}`).text("Bekor qilish ❌",`bekor_${id}`)
+    return new InlineKeyboard().text("Tasdiqlash ✅",`tasdiq_${id}`).text("Bekor qilish ❌",`bekor_${id}`).row().text("Asosiy Menyuga qaytish ❌","back");
 };
 
 
