@@ -1,7 +1,7 @@
 import { Scene } from 'grammy-scenes'
 import { AdminSceneMessages } from '../messages/index.js'
 import { APPLICATION } from '../config/index.js'
-import { Adminkeyboard, getKeyboard } from '../keyboards/index.js'
+import { Adminkeyboard, backKeyboard, getKeyboard } from '../keyboards/index.js'
 import { deletePost, formatPosts, getPosts, updatePost } from '../helpers/functions/index.js'
 
 
@@ -36,6 +36,9 @@ Adminscene.wait("start").on("callback_query:data",async(ctx)=>{
              })   
             }
 
+        }else if("back"){
+            await ctx.reply(AdminSceneMessages.success)
+            ctx.scene.exit()
         }
 
         ctx.scene.resume()
@@ -61,7 +64,8 @@ Adminscene.wait("button-actions").on("callback_query:data",async(ctx)=>{
         await ctx.api.sendMessage(id,"Post bekor qilindi ❌");
         
     }
-    
-    ctx.scene.exit()
-
+        await ctx.reply(AdminSceneMessages.back,{
+            reply_markup:backKeyboard
+        })
     })
+    
