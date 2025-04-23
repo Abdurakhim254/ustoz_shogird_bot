@@ -3,7 +3,7 @@ import { getPost, getUser } from "./index.js"
 export const formatPosts=async(id)=>{
     const post =await getPost(id)
     const user =await getUser(id)
-    const contact=""
+    let contact=""
     if(user.username!=undefined){
       contact=`@${user.username}`
   }else{
