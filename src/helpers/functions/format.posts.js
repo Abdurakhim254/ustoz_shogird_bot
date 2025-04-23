@@ -11,7 +11,7 @@ export const formatPosts=async(id)=>{
   }else{
       contact='+'+user.phone_number
   }
-  console.log(post);
+  
     const text = `   ${post.theme}
       
     👨‍💼 Xodim: ${post.name}
