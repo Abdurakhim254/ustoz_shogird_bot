@@ -1,5 +1,7 @@
 export const viloyatlar = [
     "toshkent",
+    "toshkent shahri",
+    "toshkent shaxri",
     "samarqand",
     "buxoro",
     "xorazm",
