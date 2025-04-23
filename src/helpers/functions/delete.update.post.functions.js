@@ -6,7 +6,7 @@ import { getPost } from "./index.js";
 
 export const updatePost=async(id)=>{
     await Posts.updateOne(
-        { user_id: id },
+        { user_id: id,status:false },
         { $set: { status: true } }
       );
     }
