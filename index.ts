@@ -1,11 +1,15 @@
 import express, { Express, Request, Response } from "express";
+import { bot} from "./src/bot"
+import { APPLICATION } from "./src/config";
+
 
 const app: Express = express();
 
-app.get("/", (req: Request, res: Response) => {
-   res.send("ok");
-});
+const port=APPLICATION.port
 
-app.listen(3000, () => {
-    console.log("Example app listening on port 3000!");
+
+
+app.listen(port, () => {
+    console.log("Example app listening on port "+port+"!");
+    bot.start().then(() => console.log("bot started")).catch((err) => console.log(err));
 });
