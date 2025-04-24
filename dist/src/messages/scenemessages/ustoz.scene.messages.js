@@ -35,7 +35,7 @@ exports.UstozSceneMessages = {
 
     Ishlaysizmi yoki o'qiysizmi?
     Masalan, Talaba`,
-    muroojaat_vaqti: `🕰 Murojaat qilish vaqti: 
+    murojaat_vaqti: `🕰 Murojaat qilish vaqti: 
 
     Qaysi vaqtda murojaat qilish mumkin?
     Masalan, 9:00 - 18:00`,

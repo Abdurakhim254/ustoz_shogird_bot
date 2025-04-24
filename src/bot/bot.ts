@@ -1,10 +1,10 @@
 import { Bot, MemorySessionStorage, session } from "grammy";
 import { APPLICATION } from "../config";
 import { UserService, messageDeleter } from "../helpers";
-import { MAIN_MESSAGES } from "../messages/mainmessages";
 import { Addpost, Jobkeyboard, getcontact } from "../keyboards";
 import { BotContext, SessionData } from "../utils";
 import { scenes } from "../scenes";
+import { MAIN_MESSAGES } from "../messages";
 
 
 
@@ -15,7 +15,7 @@ export const bot = new Bot<BotContext>(token);
 const storage = new MemorySessionStorage<SessionData>();
 
 bot.use(session({
-    initial: () => ({ messageIds: [], __scenes: {} }), // important: include __scenes
+    initial: () => ({ messageIds: [], __scenes: {}}), // important: include __scenes
     storage,
   }));
 
@@ -29,7 +29,6 @@ bot.command("start", async (ctx) => {
   const id = (ctx as any).from.id;
   ctx.session.messageIds = [];
   (ctx as any).session.chatId=ctx.chat.id
-  console.log(id);
   const user =await userservice.getuser(id);
   
   if (!user) {
@@ -60,6 +59,10 @@ bot.on("message:contact", async (ctx) => {
         })
         ctx.session.messageIds.push(message.message_id)
 });
+
+bot.command("notify",async(ctx)=>{
+  await ctx.scenes.enter("admin")
+})
 
 
 bot.callbackQuery("addPost",async (ctx)=>{

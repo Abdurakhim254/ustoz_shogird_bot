@@ -12,9 +12,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostService = void 0;
 const utils_1 = require("../../utils");
 class PostService {
-    createPost() {
+    createPost(props) {
         return __awaiter(this, void 0, void 0, function* () {
-            const post = yield utils_1.Posts.create({});
+            yield utils_1.Posts.create({
+                user_id: props.user_id,
+                name: props.name,
+                age: props.age,
+                texnologiya: props.texnologiya,
+                aloqa: props.aloqa,
+                hudud: props.hudud,
+                narx: props.narx,
+                kasb: props.kasb,
+                murojaat_vaqti: props.murojaat_vaqti,
+                maqsad: props.maqsad,
+                theme: props.theme,
+                tag: props.tag,
+            });
+        });
+    }
+    getPosts() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const posts = yield utils_1.Posts.find({ status: false });
+            return posts;
         });
     }
 }

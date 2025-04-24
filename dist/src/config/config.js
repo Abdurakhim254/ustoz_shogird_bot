@@ -13,10 +13,19 @@ function getEnvVar(key) {
     }
     return value;
 }
+function getEnvNumber(key) {
+    const value = getEnvVar(key);
+    const parsed = parseInt(value, 10);
+    if (isNaN(parsed)) {
+        throw new Error(`Environment variable ${key} is not a valid number`);
+    }
+    return parsed;
+}
 exports.APPLICATION = {
     token: getEnvVar("BOT_TOKEN"),
     url: getEnvVar("MONGO_URI"),
     admin_id: getEnvVar("ADMIN_ID"),
     port: getEnvVar("PORT"),
-    channel: getEnvVar("CHANNEL_NAME")
+    channel: getEnvVar("CHANNEL_NAME"),
+    ttl: getEnvNumber("SESSION_TTL"),
 };

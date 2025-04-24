@@ -1,10 +1,23 @@
 import { Context, SessionFlavor } from "grammy";
 import { ScenesSessionData,ScenesFlavor } from "grammy-scenes";
 
-// Extend your session data
 export interface SessionData extends ScenesSessionData {
     messageIds: number[];
 }
 
-// Create MyContext type by merging SessionFlavor with Context and the extended SessionData
+export interface ShablonProps{
+    user_id:number;
+    name:string;
+    age:number;
+    texnologiya:string
+    aloqa:string;
+    narx:string;
+    hudud:string;
+    kasb:string;
+    murojaat_vaqti:string;
+    maqsad:String;
+    theme:String;
+    tag:string
+}
+
 export type BotContext = Context & SessionFlavor<SessionData> & ScenesFlavor

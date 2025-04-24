@@ -13,28 +13,30 @@ exports.bot = void 0;
 const grammy_1 = require("grammy");
 const config_1 = require("../config");
 const helpers_1 = require("../helpers");
-const mainmessages_1 = require("../messages/mainmessages");
 const keyboards_1 = require("../keyboards");
+const scenes_1 = require("../scenes");
+const messages_1 = require("../messages");
 const token = config_1.APPLICATION.token;
 exports.bot = new grammy_1.Bot(token);
 const storage = new grammy_1.MemorySessionStorage();
 exports.bot.use((0, grammy_1.session)({
-    initial: () => ({ messageIds: [] }),
+    initial: () => ({ messageIds: [], __scenes: {} }), // important: include __scenes
     storage,
 }));
+exports.bot.use(scenes_1.scenes.manager());
+exports.bot.use(scenes_1.scenes);
 const userservice = new helpers_1.UserService();
 exports.bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const id = ctx.from.id;
     ctx.session.messageIds = [];
     ctx.session.chatId = ctx.chat.id;
-    console.log(id);
     const user = yield userservice.getuser(id);
     if (!user) {
-        const message = yield ctx.reply(mainmessages_1.MAIN_MESSAGES.AskContact, { reply_markup: keyboards_1.getcontact });
+        const message = yield ctx.reply(messages_1.MAIN_MESSAGES.AskContact, { reply_markup: keyboards_1.getcontact });
         ctx.session.messageIds.push(message.message_id);
     }
     else {
-        const message = yield ctx.reply(mainmessages_1.MAIN_MESSAGES.StartAdd, {
+        const message = yield ctx.reply(messages_1.MAIN_MESSAGES.StartAdd, {
             reply_markup: keyboards_1.Addpost
         });
         ctx.session.messageIds.push(message.message_id);
@@ -45,13 +47,16 @@ exports.bot.on("message:contact", (ctx) => __awaiter(void 0, void 0, void 0, fun
     if (!user) {
         yield userservice.createuser(ctx.from.id, ctx.message.contact.phone_number, ctx.message.contact.first_name, ctx.message.contact.username);
     }
-    const message = yield ctx.reply(mainmessages_1.MAIN_MESSAGES.SignUpsuccess, {
+    const message = yield ctx.reply(messages_1.MAIN_MESSAGES.SignUpsuccess, {
         reply_markup: keyboards_1.Addpost
     });
     ctx.session.messageIds.push(message.message_id);
 }));
+exports.bot.command("notify", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    yield ctx.scenes.enter("admin");
+}));
 exports.bot.callbackQuery("addPost", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    const message = yield ctx.reply(mainmessages_1.MAIN_MESSAGES.StartButtons, {
+    const message = yield ctx.reply(messages_1.MAIN_MESSAGES.StartButtons, {
         reply_markup: keyboards_1.Jobkeyboard
     });
     ctx.session.messageIds.push(message.message_id);
