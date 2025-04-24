@@ -1,5 +1,6 @@
 import {Scene} from "grammy-scenes"
+import { BotContext } from "../utils"
 
 
 
-export const Sherikscene=new Scene("sherik")
+export const Sherikscene=new Scene<BotContext>("sherik")

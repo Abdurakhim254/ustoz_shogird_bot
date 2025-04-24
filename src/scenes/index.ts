@@ -5,10 +5,11 @@ import { Ishscene } from './ish.scene'
 import { Ustozscene } from './ustoz.scene'
 import { Shogirdscene } from './shogird.scene'
 import { Sherikscene } from './sherik.scene'
+import { BotContext } from '../utils'
 
 
 
-export const scenes=new ScenesComposer(
+export const scenes=new ScenesComposer<BotContext>(
     HodimScene,
     Adminscene,
     Ishscene,
