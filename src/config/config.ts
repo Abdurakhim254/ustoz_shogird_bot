@@ -32,6 +32,6 @@ export const APPLICATION: APPLICATION = {
   url: getEnvVar("MONGO_URI"),
   admin_id: getEnvVar("ADMIN_ID"),
   port: getEnvVar("PORT"),
-  channel: getEnvVar("CHANNEL_NAME"),
+  channel: getEnvVar("ChANNEL_NAME"),
   ttl: getEnvNumber("SESSION_TTL"),
 };
