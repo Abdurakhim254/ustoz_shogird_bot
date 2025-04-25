@@ -8,9 +8,5 @@ export async function messageDeleter(ctx:any){
         }
       }
     
-
-
-
-      
       ctx.session.messageIds = []
 }
