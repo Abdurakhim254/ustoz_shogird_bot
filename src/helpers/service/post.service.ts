@@ -1,41 +1,37 @@
-import { NeededCount, Posts, ShablonProps } from "../../utils";
-
-
+import { Ipost, NeededCount, Posts } from "../../utils";
 
 export class PostService {
-   async createPost(props:ShablonProps){
+  async createPost(props: Ipost) {
     await Posts.create({
-      user_id:props.user_id,
-      name:props.name,
-      age:props.age,
-      texnologiya:props.texnologiya,
-      aloqa:props.aloqa,
-      hudud:props.hudud,
-      narx:props.narx,
-      kasb:props.kasb,
-      murojaat_vaqti:props.murojaat_vaqti,
-      maqsad:props.maqsad,
-      theme:props.theme,
-      tag:props.tag,
-    })
-   }
+      user_id: props.user_id,
+      name: props.name,
+      age: props.age,
+      texnologiya: props.texnologiya,
+      aloqa: props.aloqa,
+      hudud: props.hudud,
+      narx: props.narx,
+      kasb: props.kasb,
+      murojaat_vaqti: props.murojaat_vaqti,
+      maqsad: props.maqsad,
+      theme: props.theme,
+      tag: props.tag,
+    });
+  }
 
-
-   async getPosts(){
-      const posts=await Posts.find({status:false}).sort({timestamp:-1})
-      return posts
+  async getPosts(type: NeededCount, id = 1): Promise<Ipost[] | Ipost | null> {
+    if (type === NeededCount.ALL) {
+      return await Posts.find({ status: false }).sort({ createdAt: -1 });
+    } else if (type === NeededCount.ONE) {
+      return await Posts.findOne({ user_id: id, status: true });
+    }
+    return null;
+  }
   
-   }
 
-
-   async deletePost(id: number) {
+  async deletePost(id: number) {
     await Posts.deleteOne({ user_id: id, status: false });
   }
-  
-  async getPost(id:number){
-    const post=await Posts.findOne({user_id:id,status:true})
-    return post
-  }
+
 
   async updatePost(id: number) {
     await Posts.updateOne(
@@ -43,5 +39,4 @@ export class PostService {
       { $set: { status: true } }
     );
   }
-  
 }
