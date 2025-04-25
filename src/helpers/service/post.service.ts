@@ -25,4 +25,18 @@ export class PostService {
     const posts=await Posts.find({status:false}).sort({timestamp:-1})
     return posts
    }
+
+
+   async deletePost(id: number) {
+    await Posts.deleteOne({ user_id: id, status: false });
+  }
+  
+
+  async updatePost(id: number) {
+    await Posts.updateOne(
+      { user_id: id, status: false },
+      { $set: { status: true } }
+    );
+  }
+  
 }

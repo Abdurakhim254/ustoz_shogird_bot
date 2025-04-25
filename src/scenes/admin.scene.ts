@@ -57,10 +57,13 @@ Adminscene.wait("give-add-ingore-add").on("callback_query:data",async(ctx)=>{
     const id=query.split("_")[1]
 
     if(query.startsWith(SomeNeccessaryMessages.accept)){
-        await ctx.reply(AdminSceneMessages.Panel,{reply_markup:Adminkeyboard})
-        return ctx.scene.exit()
+        await postservice.updatePost(+id)
+        await ctx.api.sendMessage(id,SomeNeccessaryMessages.good)
+        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.good)
     }else if(query.startsWith(SomeNeccessaryMessages.reject)){
-
+        await postservice.deletePost(+id)
+        await ctx.api.sendMessage(id,SomeNeccessaryMessages.bad)
+        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.bad)
     }else if(query==SomeNeccessaryMessages.back){
         await ctx.reply(AdminSceneMessages.getMainMenu)
         return ctx.scene.exit()
