@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.scenes = void 0;
+const grammy_scenes_1 = require("grammy-scenes");
+const hodim_scene_1 = require("./hodim.scene");
+const admin_scene_1 = require("./admin.scene");
+const ish_scene_1 = require("./ish.scene");
+const ustoz_scene_1 = require("./ustoz.scene");
+const shogird_scene_1 = require("./shogird.scene");
+const sherik_scene_1 = require("./sherik.scene");
+exports.scenes = new grammy_scenes_1.ScenesComposer(hodim_scene_1.HodimScene, admin_scene_1.Adminscene, ish_scene_1.Ishscene, ustoz_scene_1.Ustozscene, shogird_scene_1.Shogirdscene, sherik_scene_1.Sherikscene);

@@ -1,5 +1,0 @@
-export * from "./askcontact.js"
-export * from "./job.keyboard.js"
-export * from "./post.start.keyboard.js"
-export * from "./all.scene.keyboards.js"
-export * from "./admin.keyboards.js"
