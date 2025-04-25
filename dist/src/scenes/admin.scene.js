@@ -17,6 +17,7 @@ const keyboards_1 = require("../keyboards");
 const helpers_1 = require("../helpers");
 exports.Adminscene = new grammy_scenes_1.Scene("admin");
 const postservice = new helpers_1.PostService();
+const formatservice = new helpers_1.FormatService();
 exports.Adminscene.step((ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const id = ctx.from.id;
     if (id != config_1.APPLICATION.admin_id) {
@@ -38,6 +39,10 @@ exports.Adminscene.wait("start").on("callback_query:data", (ctx) => __awaiter(vo
         }
         else {
             for (const post of posts) {
+                const format = yield formatservice.createTemplate(post);
+                yield ctx.api.sendMessage(config_1.APPLICATION.admin_id, format, {
+                    reply_markup: (0, keyboards_1.giveAddKeyboard)(post.user_id)
+                });
             }
         }
     }
@@ -46,4 +51,21 @@ exports.Adminscene.wait("start").on("callback_query:data", (ctx) => __awaiter(vo
         return ctx.scene.exit();
     }
     ctx.scene.resume();
+}));
+exports.Adminscene.wait("give-add-ingore-add").on("callback_query:data", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = ctx.callbackQuery.data.toLowerCase().trim();
+    const id = query.split("_")[1];
+    if (query.startsWith(messages_1.SomeNeccessaryMessages.accept)) {
+        yield postservice.updatePost(+id);
+        yield ctx.api.sendMessage(id, messages_1.SomeNeccessaryMessages.good);
+        yield ctx.api.sendMessage(config_1.APPLICATION.channel, messages_1.SomeNeccessaryMessages.good);
+    }
+    else if (query.startsWith(messages_1.SomeNeccessaryMessages.reject)) {
+        yield postservice.deletePost(+id);
+        yield ctx.api.sendMessage(id, messages_1.SomeNeccessaryMessages.bad);
+    }
+    else if (query == messages_1.SomeNeccessaryMessages.back) {
+        yield ctx.reply(messages_1.AdminSceneMessages.getMainMenu);
+        return ctx.scene.exit();
+    }
 }));

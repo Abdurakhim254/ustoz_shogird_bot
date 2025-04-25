@@ -32,8 +32,18 @@ class PostService {
     }
     getPosts() {
         return __awaiter(this, void 0, void 0, function* () {
-            const posts = yield utils_1.Posts.find({ status: false });
+            const posts = yield utils_1.Posts.find({ status: false }).sort({ timestamp: -1 });
             return posts;
+        });
+    }
+    deletePost(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield utils_1.Posts.deleteOne({ user_id: id, status: false });
+        });
+    }
+    updatePost(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield utils_1.Posts.updateOne({ user_id: id, status: false }, { $set: { status: true } });
         });
     }
 }

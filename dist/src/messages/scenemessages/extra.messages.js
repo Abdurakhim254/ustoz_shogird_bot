@@ -8,5 +8,9 @@ exports.SomeNeccessaryMessages = {
     messageBad: "Ariza Bekor qilindi",
     notification: "Yangi Ariza kelib tushdi",
     notify: "notify",
-    back: "back"
+    back: "back",
+    accept: "tasdiq_",
+    reject: "bekor_",
+    good: "Post tasdiqlandi va kanalga yuborildi ✅",
+    bad: "Post bekor qilindi ❌"
 };

@@ -28,7 +28,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pem ${{ secrets.USER }}@${{ secrets.HOST }} <<'ENDSSH'
           cd ${{ secrets.APP_PATH }}
           git pull origin main
+          rm -rf dist/
+          npx tsc
           npm i -g pnpm
           pnpm install
-          pnpm run prod
+          pm2 restart dist/index.js --name ustoz_shogird_bot
           ENDSSH
