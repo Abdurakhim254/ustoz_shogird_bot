@@ -1,4 +1,4 @@
-import { Posts, ShablonProps } from "../../utils";
+import { NeededCount, Posts, ShablonProps } from "../../utils";
 
 
 
@@ -22,8 +22,9 @@ export class PostService {
 
 
    async getPosts(){
-    const posts=await Posts.find({status:false}).sort({timestamp:-1})
-    return posts
+      const posts=await Posts.find({status:false}).sort({timestamp:-1})
+      return posts
+  
    }
 
 
@@ -31,6 +32,10 @@ export class PostService {
     await Posts.deleteOne({ user_id: id, status: false });
   }
   
+  async getPost(id:number){
+    const post=await Posts.findOne({user_id:id,status:true})
+    return post
+  }
 
   async updatePost(id: number) {
     await Posts.updateOne(

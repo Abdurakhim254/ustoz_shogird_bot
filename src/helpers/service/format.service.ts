@@ -8,7 +8,7 @@ const userservice=new UserService()
 
 export class FormatService{
     
-    async createTemplate(ctx:ShablonProps){
+    async createTemplate(ctx:any){
         const user=await userservice.getuser(ctx.user_id)
         let contact:string|number|undefined
         if(user?.username){
