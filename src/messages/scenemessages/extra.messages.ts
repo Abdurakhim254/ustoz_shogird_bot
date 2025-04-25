@@ -5,5 +5,7 @@ export const SomeNeccessaryMessages={
     messageBad:"Ariza Bekor qilindi",
     notification:"Yangi Ariza kelib tushdi",
     notify:"notify",
-    back:"back"
+    back:"back",
+    accept:"tasdiq_",
+    reject:"bekor_"
 }

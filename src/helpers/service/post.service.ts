@@ -22,7 +22,7 @@ export class PostService {
 
 
    async getPosts(){
-    const posts=await Posts.find({status:false})
+    const posts=await Posts.find({status:false}).sort({timestamp:-1})
     return posts
    }
 }
