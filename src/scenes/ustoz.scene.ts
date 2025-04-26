@@ -119,10 +119,9 @@ Ustozscene.wait("get-template").on("message:text",async(ctx)=>{
     (ctx as any ).session.theme=UstozSceneMessages.theme;
     (ctx as any ).session.user_id=ctx.message.from.id
     const format=await formatservice.createTemplate((ctx as any ).session)
-    const message=await ctx.reply(format,{
+await ctx.reply(format,{
         reply_markup:UniversalKeyboard
     })
-    ctx.session.messageIds.push(message.message_id)
 
     ctx.scene.resume()
 })

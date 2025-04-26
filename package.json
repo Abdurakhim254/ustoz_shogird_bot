@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\"",
-    "prod":"pm2  restart ustoz_shogird_bot"
+    "prod": "pm2  restart ustoz_shogird_bot"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,13 @@
   "homepage": "https://github.com/Abdurakhim254/ustoz_shogird_bot#readme",
   "description": "",
   "dependencies": {
+    "@types/node-cron": "^3.0.11",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "grammy": "^1.36.1",
     "grammy-scenes": "^10.2.0",
     "mongoose": "^8.13.2",
+    "node-cron": "^3.0.3",
     "nodemon": "^3.1.10",
     "typescript": "^5.8.3"
   },
