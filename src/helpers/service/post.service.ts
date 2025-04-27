@@ -1,8 +1,10 @@
 import { Ipost, NeededCount, Posts } from "../../utils";
+import { v4 as uuidv4 } from 'uuid';
 
 export class PostService {
   async createPost(props: Ipost) {
     await Posts.create({
+      id: uuidv4(),
       user_id: props.user_id,
       name: props.name,
       age: props.age,
@@ -28,12 +30,12 @@ export class PostService {
   }
   
 
-  async deletePost(id: number) {
+  async deletePost(id:string) {
     await Posts.deleteOne({ id: id });
   }
 
 
-  async updatePost(id: number) {
+  async updatePost(id: string) {
     await Posts.updateOne(
       { id: id},
       { $set: { status: true } }

@@ -5,8 +5,8 @@ import { APPLICATION } from "../../config";
 const postSchema = new mongoose.Schema(
   {
     id:{
-      type:Number,
-      autonincrement:true
+      type:String,
+      required:true,
     },
     user_id: {
       type: Number,
