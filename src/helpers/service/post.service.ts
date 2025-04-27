@@ -18,7 +18,7 @@ export class PostService {
     });
   }
 
-  async getPosts(type: NeededCount, id = 1): Promise<Ipost[] | Ipost | null> {
+  async getPosts(type: NeededCount, id = 1) {
     if (type === NeededCount.ALL) {
       return await Posts.find({ status: false }).sort({ createdAt: -1 });
     } else if (type === NeededCount.ONE) {
@@ -29,13 +29,13 @@ export class PostService {
   
 
   async deletePost(id: number) {
-    await Posts.deleteOne({ user_id: id, status: false });
+    await Posts.deleteOne({ id: id });
   }
 
 
   async updatePost(id: number) {
     await Posts.updateOne(
-      { user_id: id, status: false },
+      { id: id},
       { $set: { status: true } }
     );
   }

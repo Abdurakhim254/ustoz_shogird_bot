@@ -41,7 +41,7 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
       for (const post of posts) {
         const format = await formatservice.createTemplate(post);
         await ctx.api.sendMessage(APPLICATION.admin_id, format, {
-          reply_markup: giveAddKeyboard(post.user_id),
+          reply_markup: giveAddKeyboard(post.id),
         });
       }
   

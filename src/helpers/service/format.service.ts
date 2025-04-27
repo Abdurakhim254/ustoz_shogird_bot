@@ -1,4 +1,3 @@
-import { ShablonProps } from "../../utils";
 import { UserService } from "./user.service";
 
 
