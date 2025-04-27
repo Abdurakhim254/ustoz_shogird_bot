@@ -65,14 +65,14 @@ Adminscene.wait("give-add-ingore-add").on("callback_query:data",async(ctx)=>{
     if(query.startsWith(SomeNeccessaryMessages.accept)){
         await postservice.updatePost(id)
         await ctx.api.deleteMessage((ctx as any).session.chatId ,+deleteid)
-        const post=await postservice.getPosts(NeededCount.ONE,+id)
+        const post=await postservice.getPosts(NeededCount.ONE,id)
         const format=await formatservice.createTemplate(post)
-        await ctx.api.sendMessage(id,SomeNeccessaryMessages.good)
+        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.good)
         await ctx.api.sendMessage(APPLICATION.channel,format)
     }else if(query.startsWith(SomeNeccessaryMessages.reject)){
       await ctx.api.deleteMessage((ctx as any).session.chatId ,+deleteid)
         await postservice.deletePost(id)
-        await ctx.api.sendMessage(id,SomeNeccessaryMessages.bad)
+        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.bad)
     }else if(query==SomeNeccessaryMessages.back){
         await ctx.reply(AdminSceneMessages.getMainMenu)
         return ctx.scene.exit()

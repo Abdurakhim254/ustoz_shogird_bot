@@ -20,7 +20,7 @@ export class PostService {
     });
   }
 
-  async getPosts(type: NeededCount, id = 1) {
+  async getPosts(type: NeededCount, id = "") {
     if (type === NeededCount.ALL) {
       return await Posts.find({ status: false }).sort({ createdAt: -1 });
     } else if (type === NeededCount.ONE) {
