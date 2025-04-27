@@ -1,3 +1,4 @@
+import { Ipost } from "../../utils";
 import { UserService } from "./user.service";
 
 

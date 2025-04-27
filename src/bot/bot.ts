@@ -60,7 +60,7 @@ bot.on("message:contact", async (ctx) => {
         ctx.session.messageIds.push(message.message_id)
 });
 
-bot.command("admin",async(ctx)=>{
+bot.command("notify",async(ctx)=>{
   await ctx.scenes.enter("admin")
 })
 
