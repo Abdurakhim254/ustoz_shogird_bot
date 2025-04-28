@@ -46,12 +46,12 @@ bot.command("start", async (ctx) => {
 bot.on("message:contact", async (ctx) => {
     const user=await userservice.getuser((ctx as any).from.id)
     if(!user){
-        await userservice.createuser(
-            (ctx as any).from.id,
-            (ctx as any).message.contact.phone_number,
-            (ctx as any).message.contact.first_name,
-            (ctx as any).message.contact.username
-            );
+      await userservice.createuser(
+        ctx.from.id,
+       +ctx.message.contact.phone_number,
+        ctx.message.contact.first_name,
+        ctx.message.from.username || ""
+    );
         }
       const message=  await ctx.reply(MAIN_MESSAGES.SignUpsuccess, {
             reply_markup:Addpost  
