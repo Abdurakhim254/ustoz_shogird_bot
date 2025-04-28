@@ -59,13 +59,11 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
 Adminscene.wait("give-add-ingore-add").on("callback_query:data",async(ctx)=>{
     const query = ctx.callbackQuery.data.toLowerCase().trim();
     const id=query.split("_")[1]
-    const deleteid=query.split("_")[2]
     const post=await postservice.getPosts(NeededCount.ONE,id)
+    const format=await formatservice.createTemplate(post)
     if(query.startsWith(SomeNeccessaryMessages.accept)){
       if(post){
         await postservice.updatePost(id)
-        await ctx.api.deleteMessage((ctx as any).session.chatId ,+deleteid)
-        const format=await formatservice.createTemplate(post)
         await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.good)
         await ctx.api.sendMessage(APPLICATION.channel,format)
       }else{
