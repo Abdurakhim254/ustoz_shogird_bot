@@ -59,9 +59,9 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
 Adminscene.wait("give-add-ingore-add").on("callback_query:data",async(ctx)=>{
     const query = ctx.callbackQuery.data.toLowerCase().trim();
     const id=query.split("_")[1]
-    const post=await postservice.getPosts(NeededCount.ONE,id)
-    const format=await formatservice.createTemplate(post)
     if(query.startsWith(SomeNeccessaryMessages.accept)){
+      const post=await postservice.getPosts(NeededCount.ONE,id)
+      const format=await formatservice.createTemplate(post)
       if(post){
         await postservice.updatePost(id)
         await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.good)
@@ -70,11 +70,12 @@ Adminscene.wait("give-add-ingore-add").on("callback_query:data",async(ctx)=>{
         await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.ignore)
       }
     }else if(query.startsWith(SomeNeccessaryMessages.reject)){
-      if(post){
+      const status=await postservice.getPosts(NeededCount.STATUS,id)
+      if(status){
+        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.ignore)
+      }else{
         await postservice.deletePost(id)
         await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.bad)
-      }else{
-        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.ignore)
       }
     }else if(query==SomeNeccessaryMessages.back){
         await ctx.reply(AdminSceneMessages.getMainMenu)

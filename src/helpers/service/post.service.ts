@@ -20,11 +20,14 @@ export class PostService {
     });
   }
 
-  async getPosts(type: NeededCount, id = "") {
+  async getPosts(type: NeededCount, id = ""){
     if (type === NeededCount.ALL) {
       return await Posts.find({ status: false }).sort({ createdAt: -1 });
     } else if (type === NeededCount.ONE) {
       return await Posts.findOne({ id: id });
+    }else if(type === NeededCount.STATUS){
+        const posts =  await Posts.findOne({ id: id });
+        return posts?.status
     }
     return null;
   }

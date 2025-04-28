@@ -55,7 +55,8 @@ const postSchema = new mongoose.Schema(
     tag: {
       type: String,
       required: true,
-    },status: {
+    }
+    ,status: {
       type: Boolean,
       default: false,
     }
