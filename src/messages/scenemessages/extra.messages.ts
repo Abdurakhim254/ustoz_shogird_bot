@@ -9,5 +9,6 @@ export const SomeNeccessaryMessages={
     accept:"tasdiq_",
     reject:"bekor_",
     good:"Post tasdiqlandi va kanalga yuborildi ✅",
-    bad:"Post bekor qilindi ❌"
+    bad:"Post bekor qilindi ❌",
+    ignore:"Post tasdiqlanmadi va kanalga yuborilmadi ❌"
 }
