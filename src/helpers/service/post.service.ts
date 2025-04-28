@@ -24,7 +24,7 @@ export class PostService {
     if (type === NeededCount.ALL) {
       return await Posts.find({ status: false }).sort({ createdAt: -1 });
     } else if (type === NeededCount.ONE) {
-      return await Posts.findOne({ user_id: id, status: true });
+      return await Posts.findOne({ id: id, status: true });
     }
     return null;
   }

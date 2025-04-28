@@ -110,7 +110,7 @@ HodimScene.wait("get-template").on("message:text", async (ctx) => {
   (ctx as any).session.maqsad = ctx.message.text;
   (ctx as any).session.tag = HodimSceneMessages.tag;
   (ctx as any).session.theme = HodimSceneMessages.theme;
-  (ctx as any).session.user_id = ctx.message.from.id;
+  (ctx as any ).session.user_id=ctx.from.id
   const format = await formatservice.createTemplate((ctx as any).session);
     await ctx.reply(format, {
     reply_markup: UniversalKeyboard,
@@ -120,7 +120,6 @@ HodimScene.wait("get-template").on("message:text", async (ctx) => {
 
 HodimScene.wait("last-middleware").on("message:text", async (ctx) => {
     const query = ctx.message.text.toLocaleLowerCase();
-    await messageDeleter(ctx);
   
     try {
       if (query === SomeNeccessaryMessages.yes) {
@@ -139,6 +138,6 @@ HodimScene.wait("last-middleware").on("message:text", async (ctx) => {
         await ctx.reply(ErrorMessages.error);
       }
     }
-  
+
     ctx.scene.exit();
 });

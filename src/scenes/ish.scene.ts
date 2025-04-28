@@ -105,7 +105,7 @@ Ishscene.wait("get-template").on("message:text", async (ctx) => {
   (ctx as any).session.maqsad = ctx.message.text;
   (ctx as any).session.tag = IShSceneMessages.tag;
   (ctx as any).session.theme = IShSceneMessages.theme;
-  (ctx as any).session.user_id = ctx.message.from.id;
+  (ctx as any ).session.user_id=ctx.from.id
   const format = await formatservice.createTemplate((ctx as any).session);
 await ctx.reply(format, {
     reply_markup: UniversalKeyboard,
