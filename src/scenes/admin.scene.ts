@@ -1,8 +1,8 @@
 import {Scene} from "grammy-scenes"
 import { BotContext, NeededCount } from "../utils";
 import { APPLICATION } from "../config";
-import { AdminSceneMessages, SomeNeccessaryMessages } from "../messages";
-import { Adminkeyboard, giveAddKeyboard } from "../keyboards";
+import { AdminSceneMessages, ButtonMessages, SomeNeccessaryMessages } from "../messages";
+import { Adminkeyboard, JobTypeKeyboards, giveAddKeyboard } from "../keyboards";
 import { FormatService, PostService, messageDeleter } from "../helpers";
 
 
@@ -30,56 +30,38 @@ Adminscene.step(async(ctx)=>{
 
 Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     const query = ctx.callbackQuery.data.toLowerCase().trim();
-  
+
     if (query === SomeNeccessaryMessages.notify) {
-      const posts = await postservice.getPosts(NeededCount.ALL);
+        await ctx.reply(AdminSceneMessages.addtypes,{
+          reply_markup:JobTypeKeyboards
+        })
+      }
       
-      if (!Array.isArray(posts) || posts.length === 0) {
-        await ctx.api.sendMessage(APPLICATION.admin_id, AdminSceneMessages.noPosts);
-        return ctx.scene.exit();
-      }
-  
-      for (const post of posts) {
-        const format = await formatservice.createTemplate(post);
-        await ctx.api.sendMessage(APPLICATION.admin_id, format, {
-          reply_markup: giveAddKeyboard(post.id,ctx.msg?.message_id),
-        });
-      }
-  
-    } else if (query === SomeNeccessaryMessages.back) {
-      await ctx.reply(AdminSceneMessages.getMainMenu);
-      return ctx.scene.exit();
-    }
-  
-    ctx.scene.resume();
+      ctx.scene.resume();
   });
   
 
 
-Adminscene.wait("give-add-ingore-add").on("callback_query:data",async(ctx)=>{
-    const query = ctx.callbackQuery.data.toLowerCase().trim();
-    const id=query.split("_")[1]
-    if(query.startsWith(SomeNeccessaryMessages.accept)){
-      const post=await postservice.getPosts(NeededCount.ONE,id)
-      const format=await formatservice.createTemplate(post)
-      if(post){
-        await postservice.updatePost(id)
-        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.good)
-        await ctx.api.sendMessage(APPLICATION.channel,format)
-      }else{
-        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.ignore)
-      }
-    }else if(query.startsWith(SomeNeccessaryMessages.reject)){
-      const status=await postservice.getPosts(NeededCount.STATUS,id)
-      if(status){
-        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.ignore)
-      }else{
-        await postservice.deletePost(id)
-        await ctx.api.sendMessage(APPLICATION.admin_id,SomeNeccessaryMessages.bad)
-      }
-    }else if(query==SomeNeccessaryMessages.back){
-        await ctx.reply(AdminSceneMessages.getMainMenu)
-        return ctx.scene.exit()
+Adminscene.wait("give-add-by-types").on("callback_query:data",async(ctx)=>{
+    const query=ctx.callbackQuery.data.toLowerCase().trim()
+    if(query==ButtonMessages.ish){
+
+    }else if(query==ButtonMessages.hodim){
+
+    }else if(query==ButtonMessages.ustoz){
+
+    }else if(query==ButtonMessages.sherik){
+
     }
+
+    ctx.scene.resume()
 })
+
+
+Adminscene.wait("last-middleware").on("callback_query:data",async(ctx)=>{
+  
+})
+
+
+
 

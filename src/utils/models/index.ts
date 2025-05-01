@@ -1,2 +1,5 @@
-export * from "./post.model"
 export * from "./user.model"
+export * from "./Hodim.model"
+export * from "./Sherik.model"
+export * from "./Job.model"
+export * from "./Ustoz.model"

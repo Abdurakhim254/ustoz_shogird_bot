@@ -96,10 +96,4 @@ bot.callbackQuery("sherik", async (ctx) => {
   
     await ctx.scenes.enter("ustoz");
   });
-  
-  bot.callbackQuery("shogird", async (ctx) => {
-    await messageDeleter(ctx);
-  
-    await ctx.scenes.enter("shogird");
-  });
 
