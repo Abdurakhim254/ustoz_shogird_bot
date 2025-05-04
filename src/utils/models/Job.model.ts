@@ -32,11 +32,11 @@ const Jobschema = new mongoose.Schema<IJob>(
       type: String,
       required: true,
     },
-    narxi: {
+    narx: {
       type: String,
       required: true,
     },
-    kasbi: {
+    kasb: {
       type: String,
       required: true,
     },

@@ -9,7 +9,7 @@ export interface IUstoz extends Document {
     texnologiya: string;
     aloqa: string;
     hudud: string;
-    narxi: string;
+    narx: string;
     theme: string;
   tag: string;
     murojaat_vaqti: string;

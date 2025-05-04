@@ -40,6 +40,10 @@ const HodimSchema = new mongoose.Schema<IHodim>(
       type: String,
       required: true,
     },
+    narx:{
+      type: String,
+      required: true,
+    },
     theme: {
       type: String,
       required: true,

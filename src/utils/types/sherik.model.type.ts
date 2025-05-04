@@ -7,8 +7,8 @@ export interface ISherik extends Document {
   texnologiya: string;
   aloqa: string;
   hudud: string;
-  narxi: string;
-  kasbi: string;
+  narx: string;
+  kasb: string;
   theme: string;
   tag: string;
   murojaat_vaqti: string;

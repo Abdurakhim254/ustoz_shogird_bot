@@ -7,6 +7,7 @@ export interface IHodim extends Document {
   texnologiya: string;
   hudud: string;
   masul: string;
+  narx:string;
   murojaat_vaqti: string;
   ish_vaqti: string;
   theme: string;
