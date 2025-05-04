@@ -75,7 +75,7 @@ export class FormatService {
         contact = user?.phone_number;
       }
       formatPost = `   ${ctx.theme}
-    🏢 Idora: ${ctx.kompany}
+    🏢 Idora: ${ctx.idora}
     📚 Texnologiya: ${ctx.texnologiya} 
     🇺🇿 Telegram: ${contact}
     📞 Aloqa: ${ctx.aloqa}
@@ -85,7 +85,6 @@ export class FormatService {
     🕰 Murojaat qilish vaqti: ${ctx.murojaat_vaqti}
     🕰 Ish vaqti: ${ctx.ish_vaqti}
     💰 Maosh: ${ctx.narx} 
-    🔎 Maqsad: ${ctx.maqsad}
     ‼️ Qo'shimcha:${ctx.qoshimcha}
     ${ctx.tag} #${ctx.hudud}`;
       return formatPost;

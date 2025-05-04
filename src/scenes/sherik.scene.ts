@@ -101,7 +101,7 @@ Sherikscene.wait("get-template").on("message:text", async (ctx) => {
   (ctx as any).session.user_id = ctx.from.id;
   const format = await formatservice.createTemplate(
     (ctx as any).session,
-    AddType.ISH
+    AddType.SHERIK
   );
   if (format) {
     await ctx.reply(format, { reply_markup: UniversalKeyboard });
