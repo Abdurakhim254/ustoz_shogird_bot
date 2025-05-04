@@ -1,9 +1,9 @@
 import {Scene} from "grammy-scenes"
-import { BotContext, uzbPhoneRegex, viloyatlar } from "../utils"
-import { FormatService, PostService, messageDeleter } from "../helpers"
+import { AddType, BotContext, IUstoz, Ustoz, uzbPhoneRegex, viloyatlar } from "../utils"
 import { ErrorMessages, SomeNeccessaryMessages, UstozSceneMessages } from "../messages"
 import { APPLICATION } from "../config"
 import { UniversalKeyboard } from "../keyboards"
+import { FormatService, UniversalService, messageDeleter } from "../helpers"
 
 
 export const Ustozscene=new Scene<BotContext>("ustoz")
@@ -11,7 +11,7 @@ export const Ustozscene=new Scene<BotContext>("ustoz")
 
 
 const formatservice=new FormatService()
-const postservice=new PostService()
+const universalService=new UniversalService<IUstoz>(Ustoz)
 
 
 Ustozscene.step(async(ctx)=>{
@@ -78,27 +78,18 @@ Ustozscene.wait("get-aloqa").on("message:text", async (ctx) => {
     ctx.scene.resume()
 })
 
-Ustozscene.wait("get-kasb").on("message:text",async(ctx)=>{
+Ustozscene.wait("get-murojaat").on("message:text",async(ctx)=>{
     ctx.session.messageIds.push(ctx.msg?.message_id);
 
     if(viloyatlar.includes(ctx.message.text.toLowerCase())){
         (ctx as any ).session.hudud = ctx.message.text;
-        const message=await ctx.reply(UstozSceneMessages.kasb)
+        const message=await ctx.reply(UstozSceneMessages.murojaat_vaqti)
         ctx.session.messageIds.push(message.message_id)
         ctx.scene.resume()
     }else{
        const message= await ctx.reply(UstozSceneMessages.hudud)
         ctx.session.messageIds.push(message.message_id)
     }
-})
-
-Ustozscene.wait("get-murojaat").on("message:text",async(ctx)=>{
-    ctx.session.messageIds.push(ctx.msg?.message_id);
-
-    (ctx as any ).session.kasb = ctx.message.text;
-    const message=await ctx.reply(UstozSceneMessages.murojaat_vaqti)
-    ctx.session.messageIds.push(message.message_id)
-    ctx.scene.resume()
 })
 
 Ustozscene.wait("get-maqsad").on("message:text",async(ctx)=>{
@@ -111,6 +102,7 @@ Ustozscene.wait("get-maqsad").on("message:text",async(ctx)=>{
 })
 
 
+
 Ustozscene.wait("get-template").on("message:text",async(ctx)=>{
     ctx.session.messageIds.push(ctx.msg?.message_id);
 
@@ -118,10 +110,11 @@ Ustozscene.wait("get-template").on("message:text",async(ctx)=>{
     (ctx as any ).session.tag=UstozSceneMessages.tag;
     (ctx as any ).session.theme=UstozSceneMessages.theme;
     (ctx as any ).session.user_id=ctx.from.id
-    const format=await formatservice.createTemplate((ctx as any ).session)
-await ctx.reply(format,{
-        reply_markup:UniversalKeyboard
-    })
+    const format = await formatservice.createTemplate((ctx as any).session, AddType.USTOZ);
+    if (format) {
+      await ctx.reply(format, { reply_markup: UniversalKeyboard });
+    }
+    
 
     ctx.scene.resume()
 })
@@ -132,7 +125,7 @@ Ustozscene.wait("last-middleware").on("message:text", async (ctx) => {
   
     try {
       if (query === SomeNeccessaryMessages.yes) {
-        await postservice.createPost((ctx as any).session);
+        await universalService.create((ctx as any).session);
         await ctx.api.sendMessage(APPLICATION.admin_id, SomeNeccessaryMessages.notification);
         await ctx.reply(SomeNeccessaryMessages.messageGood);
   

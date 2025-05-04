@@ -31,10 +31,6 @@ export const UstozSceneMessages={
 
     Tolov qilasizmi yoki Tekinmi?
     Kerak bo'lsa, Summani kiriting?`,
-    kasb:`👨🏻‍💻 Kasbi: 
-
-    Ishlaysizmi yoki o'qiysizmi?
-    Masalan, Talaba`,
     murojaat_vaqti:`🕰 Murojaat qilish vaqti: 
 
     Qaysi vaqtda murojaat qilish mumkin?

@@ -8,11 +8,8 @@ export const HodimSceneMessages={
     Hozir sizga birnecha savollar beriladi. 
     Har biriga javob bering. 
     Oxirida agar hammasi to'g'ri bo'lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.`,
-    name:"Ism Familyangizni kiriting ?",
-    age:`🕑 Yosh: 
-
-    Yoshingizni kiriting?
-    Masalan, 19`,
+    Idora:"Idora yoki kompaniya nomini kiriting ?",
+   
     texnologiya:`📚 Texnologiya:
 
     Talab qilinadigan texnologiyalarni kiriting?
@@ -27,21 +24,21 @@ export const HodimSceneMessages={
 
     Qaysi hududdansiz?
     Viloyat nomi, Toshkent shahar yoki Respublikani kiriting.`,
+
+    masul:`Ma'sul shaxsni ismi va familyasi kiriting ?`,
+    murojaat_vaqti:`🕰 Murojaat qilish vaqti: 
+    Qaysi vaqtda murojaat qilish mumkin?
+
+    Masalan, 9:00 - 18:00`,
+    ish_vaqti:`Ish vaqtini kiriting ?
+
+    Masalan, 9:00 - 18:00`,
     narx:`💰 Narxi:
 
     Tolov qilasizmi yoki Tekinmi?
     Kerak bo'lsa, Summani kiriting?`,
-    kasb:`👨🏻‍💻 Kasbi: 
 
-    Ishlaysizmi yoki o'qiysizmi?
-    Masalan, Talaba`,
-    murojaat_vaqti:`🕰 Murojaat qilish vaqti: 
-
-    Qaysi vaqtda murojaat qilish mumkin?
-    Masalan, 9:00 - 18:00`,
-    maqsad:`🔎 Maqsad: 
-
-    Maqsadingizni qisqacha yozib bering`,
+    qoshimcha:`Qo'shimcha ma'lumotlarni kiriting ?`,
 
     tag:"#xodim"
 }

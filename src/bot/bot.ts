@@ -1,8 +1,8 @@
 import { Bot, MemorySessionStorage, session } from "grammy";
 import { APPLICATION } from "../config";
-import { UserService, messageDeleter } from "../helpers";
+import { UniversalService, messageDeleter } from "../helpers";
 import { Addpost, Jobkeyboard, getcontact } from "../keyboards";
-import { BotContext, SessionData } from "../utils";
+import { BotContext, IUser, SessionData, User } from "../utils";
 import { scenes } from "../scenes";
 import { MAIN_MESSAGES } from "../messages";
 
@@ -11,6 +11,8 @@ import { MAIN_MESSAGES } from "../messages";
 
 const token = APPLICATION.token;
 export const bot = new Bot<BotContext>(token);
+
+const universalService=new UniversalService<IUser>(User)
 
 const storage = new MemorySessionStorage<SessionData>();
 
@@ -23,13 +25,13 @@ bot.use(scenes.manager());
 bot.use(scenes)
 
 
-const userservice = new UserService();
+
 
 bot.command("start", async (ctx) => {
   const id = (ctx as any).from.id;
   ctx.session.messageIds = [];
   (ctx as any).session.chatId=ctx.chat.id
-  const user =await userservice.getuser(id);
+  const user =await universalService.getUser(id)
   
   if (!user) {
    const message= await ctx.reply(MAIN_MESSAGES.AskContact, { reply_markup: getcontact });
@@ -44,15 +46,15 @@ bot.command("start", async (ctx) => {
 
 
 bot.on("message:contact", async (ctx) => {
-    const user=await userservice.getuser((ctx as any).from.id)
-    if(!user){
-      await userservice.createuser(
-        ctx.from.id,
-       +ctx.message.contact.phone_number,
-        ctx.message.contact.first_name,
-        ctx.message.from.username || ""
-    );
-        }
+  const user = await universalService.getUser((ctx as any).from.id);
+  if (!user) {
+    await universalService.create({
+      user_id: ctx.from.id,
+      phone_number: parseInt(ctx.message.contact.phone_number, 10),
+      first_name: ctx.message.contact.first_name,
+      username: ctx.message.from.username || "", 
+    }as IUser)
+  }
       const message=  await ctx.reply(MAIN_MESSAGES.SignUpsuccess, {
             reply_markup:Addpost  
         

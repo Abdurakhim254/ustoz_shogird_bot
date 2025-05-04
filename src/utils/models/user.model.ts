@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 import { APPLICATION } from "../../config";
+import { IUser } from "../types/user.model.type";
 
-const usersSchema = new mongoose.Schema(
+const usersSchema = new mongoose.Schema<IUser>(
   {
     user_id: {
       type: Number,
@@ -14,4 +15,4 @@ const usersSchema = new mongoose.Schema(
   { timestamps: true }
 );
  mongoose.connect(APPLICATION.url);
-export const User = mongoose.model("user", usersSchema);
+export const User = mongoose.model<IUser>("user", usersSchema);

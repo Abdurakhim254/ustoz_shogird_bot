@@ -1,14 +1,14 @@
 import { Scene } from "grammy-scenes";
-import { BotContext, uzbPhoneRegex, viloyatlar } from "../utils";
+import { AddType, BotContext, IJob, Job, uzbPhoneRegex, viloyatlar } from "../utils";
 import { ErrorMessages, IShSceneMessages, SomeNeccessaryMessages } from "../messages";
-import { FormatService, PostService, messageDeleter } from "../helpers";
+import {  FormatService, UniversalService, messageDeleter } from "../helpers";
 import { UniversalKeyboard } from "../keyboards";
 import { APPLICATION } from "../config";
 
 export const Ishscene = new Scene<BotContext>("Ish");
 
-const formatservice = new FormatService();
-const postservice = new PostService();
+const formatservice=new FormatService()
+const universalService=new UniversalService<IJob>(Job)
 
 Ishscene.step(async (ctx) => {
   ctx.session.messageIds = [];
@@ -106,10 +106,10 @@ Ishscene.wait("get-template").on("message:text", async (ctx) => {
   (ctx as any).session.tag = IShSceneMessages.tag;
   (ctx as any).session.theme = IShSceneMessages.theme;
   (ctx as any ).session.user_id=ctx.from.id
-  const format = await formatservice.createTemplate((ctx as any).session);
-await ctx.reply(format, {
-    reply_markup: UniversalKeyboard,
-  });
+  const format = await formatservice.createTemplate((ctx as any).session, AddType.ISH);
+if (format) {
+  await ctx.reply(format, { reply_markup: UniversalKeyboard });
+};
 
   ctx.scene.resume();
 });
@@ -120,7 +120,7 @@ Ishscene.wait("last-middleware").on("message:text", async (ctx) => {
   
     try {
       if (query === SomeNeccessaryMessages.yes) {
-        await postservice.createPost((ctx as any).session);
+        await universalService.create((ctx as any).session);
         await ctx.api.sendMessage(APPLICATION.admin_id, SomeNeccessaryMessages.notification);
         await ctx.reply(SomeNeccessaryMessages.messageGood);
   

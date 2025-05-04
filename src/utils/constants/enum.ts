@@ -3,3 +3,11 @@ export enum NeededCount{
     ONE="one",
     STATUS="status"
 }
+
+
+export enum AddType{
+    ISH="ish",
+    HODIM="hodim",
+    USTOZ="ustoz",
+    SHERIK="sherik"
+}
