@@ -36,7 +36,7 @@ HodimScene.wait("get-texnologiya").on("message:text", async (ctx) => {
   ctx.scene.resume();
 });
 
-HodimScene.wait("get-texnologiya").on("message:text", async (ctx) => {
+HodimScene.wait("get-aloqa").on("message:text", async (ctx) => {
   ctx.session.messageIds.push(ctx.msg?.message_id);
 
   (ctx as any).session.texnologiya = ctx.message.text;
