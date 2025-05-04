@@ -56,6 +56,7 @@ export class FormatService {
         contact = user?.phone_number;
       }
       formatPost = `   ${ctx.theme}
+      
       🎓 Shogird: ${ctx.name}
       🕑 Yosh: ${ctx.age}
       📚 Texnologiya: ${ctx.texnologiya} 
@@ -75,12 +76,13 @@ export class FormatService {
         contact = user?.phone_number;
       }
       formatPost = `   ${ctx.theme}
+
     🏢 Idora: ${ctx.idora}
     📚 Texnologiya: ${ctx.texnologiya} 
     🇺🇿 Telegram: ${contact}
     📞 Aloqa: ${ctx.aloqa}
     🌐 Hudud: ${ctx.hudud}
-    ✍️ Mas'ul:${ctx.masul} 
+    ✍️ Mas'ul: ${ctx.masul} 
     💰 Narxi: ${ctx.narx}
     🕰 Murojaat qilish vaqti: ${ctx.murojaat_vaqti}
     🕰 Ish vaqti: ${ctx.ish_vaqti}
