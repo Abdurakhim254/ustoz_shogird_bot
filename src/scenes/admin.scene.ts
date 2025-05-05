@@ -65,6 +65,12 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
         type = AddType.SHERIK;
         break;
     }
+    
+    if(query==SomeNeccessaryMessages.back){
+      await ctx.reply(AdminSceneMessages.getMainMenu)
+      return ctx.scene.exit()
+
+    }
   
     if (model && type) {
       await UniversalAdminFunction(ctx, model, type);
