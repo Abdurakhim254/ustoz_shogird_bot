@@ -80,16 +80,13 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
   });
   
   Adminscene.wait("send-to-channel-middleware").on("callback_query:data", async (ctx) => {
-    const query = ctx.callbackQuery.data.toLowerCase().trim();
-    const [id, modelType,type] = query.split("_");
-  
+    const [action, id, modelType, type] = ctx.callbackQuery.data.toLowerCase().trim().split("_");
+    
     const model = modelMap[modelType];
-    
-    console.log(id);
-    
   
     const universalService = createUniversalService(model);
-    if (query.startsWith(SomeNeccessaryMessages.accept)) {
+  
+    if (action.startsWith(SomeNeccessaryMessages.accept)) {
       const post=await universalService.getByid(id)
       await universalService.update(id);
       await ctx.api.sendMessage(id, SomeNeccessaryMessages.good);
@@ -98,10 +95,10 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
         await ctx.api.sendMessage(APPLICATION.channel,format);
         await ctx.api.sendMessage(APPLICATION.admin_id, SomeNeccessaryMessages.good);
       }
-    } else if (query.startsWith(SomeNeccessaryMessages.reject)) {
+    } else if (action.startsWith(SomeNeccessaryMessages.reject)) {
       await universalService.delete(id);
       await ctx.reply(SomeNeccessaryMessages.ignore);
-    } else if (query.startsWith(SomeNeccessaryMessages.back)) {
+    } else if (action.startsWith(SomeNeccessaryMessages.back)) {
       await ctx.reply(AdminSceneMessages.getMainMenu);
       return ctx.scene.exit();
     }
