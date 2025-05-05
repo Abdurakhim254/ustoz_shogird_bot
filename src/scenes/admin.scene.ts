@@ -88,20 +88,21 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
         
 
     const universalService = createUniversalService(model);
-    console.log(action);
+
+    const post=await universalService.getByid(id)
     
+    const format = await formatter.createTemplate(post, type.toUpperCase() as AddType);
+
     if (action.startsWith(SomeNeccessaryMessages.accept)) {
       
-      const post=await universalService.getByid(id)
       await universalService.update(id);
       await ctx.api.sendMessage(id, SomeNeccessaryMessages.good);
-      const format = await formatter.createTemplate(post, type.toUpperCase() as AddType);
       console.log(format);
-      
+    
       if(format){
         await ctx.api.sendMessage(APPLICATION.channel,format);
-        await ctx.api.sendMessage(APPLICATION.admin_id, SomeNeccessaryMessages.good);
       }
+      await ctx.api.sendMessage(APPLICATION.admin_id, SomeNeccessaryMessages.good);
     } else if (action.startsWith(SomeNeccessaryMessages.reject)) {
       await universalService.delete(id);
       await ctx.reply(SomeNeccessaryMessages.ignore);
