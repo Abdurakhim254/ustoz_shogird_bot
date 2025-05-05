@@ -15,6 +15,8 @@ export const Adminkeyboard = new InlineKeyboard().text(
 export const giveAddKeyboard = <T extends Document>(id: number, model: Model<T>,type: AddType) => {
   let modelType="";
 
+  console.log(model.modelName);
+  
   if(model.modelName=="Job"){
     modelType="ish"
   }else if(model.modelName=="Hodim"){
