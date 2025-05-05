@@ -92,7 +92,8 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     const post=await universalService.getByid(id)
     
     const format = await formatter.createTemplate(post, type.toUpperCase() as AddType);
-
+    console.log(APPLICATION.channel);
+    
     if (action.startsWith(SomeNeccessaryMessages.accept)) {
       
       await universalService.update(id);
