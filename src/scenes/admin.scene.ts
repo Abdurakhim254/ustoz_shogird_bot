@@ -91,6 +91,8 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     console.log(action);
     
     if (action.startsWith(SomeNeccessaryMessages.accept)) {
+      console.log(action.startsWith(SomeNeccessaryMessages.accept));
+      
       const post=await universalService.getByid(id)
       await universalService.update(id);
       await ctx.api.sendMessage(id, SomeNeccessaryMessages.good);
