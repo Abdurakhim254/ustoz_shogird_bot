@@ -90,7 +90,6 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     const universalService = createUniversalService(model);
     console.log(action);
     
-    console.log(action.startsWith(SomeNeccessaryMessages.accept));
     if (action.startsWith(SomeNeccessaryMessages.accept)) {
       
       const post=await universalService.getByid(id)

@@ -6,8 +6,8 @@ export const SomeNeccessaryMessages={
     notification:"Yangi Ariza kelib tushdi",
     notify:"notify",
     back:"back",
-    accept:"tasdiq_",
-    reject:"bekor_",
+    accept:"tasdiq",
+    reject:"bekor",
     good:"Post tasdiqlandi va kanalga yuborildi ✅",
     bad:"Post bekor qilindi ❌",
     ignore:"Post tasdiqlanmadi va kanalga yuborilmadi ❌"
