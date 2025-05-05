@@ -85,6 +85,8 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
   
     const model = modelMap[modelType];
     
+    console.log(id);
+    
   
     const universalService = createUniversalService(model);
     if (query.startsWith(SomeNeccessaryMessages.accept)) {
