@@ -84,7 +84,8 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     
     const model = modelMap[modelType];
 
-    
+    console.log(modelType);
+        
 
     const universalService = createUniversalService(model);
   

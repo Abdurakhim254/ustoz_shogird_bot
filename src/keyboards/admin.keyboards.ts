@@ -13,19 +13,7 @@ export const Adminkeyboard = new InlineKeyboard().text(
 
 
 export const giveAddKeyboard = <T extends Document>(id: number, model: Model<T>,type: AddType) => {
-  let modelType="";
-
-  console.log(model.modelName);
-  
-  if(model.modelName=="Job"){
-    modelType="ish"
-  }else if(model.modelName=="Hodim"){
-    modelType="hodim"
-  }else if(model.modelName=="Ustoz"){
-    modelType="ustoz"
-  }else if(model.modelName=="Sherik"){
-    modelType="sherik"
-  }
+  const modelType = model.modelName.toLowerCase();
 
   return new InlineKeyboard()
     .text("Tasdiqlash ✅", `tasdiq_${id}_${modelType}_${type}`)
