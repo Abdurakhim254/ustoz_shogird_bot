@@ -6,3 +6,7 @@ export const AdminSceneMessages = {
     getMainMenu:"Asosiy menyuga otildi",
     addtypes:"E'lon berish turlarini tanlang",
   };
+
+
+
+  
