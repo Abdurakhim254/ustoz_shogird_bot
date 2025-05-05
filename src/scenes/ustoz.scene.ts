@@ -134,7 +134,6 @@ Ustozscene.wait("last-middleware").on("message:text", async (ctx) => {
       }
     } catch (error) {
       const err = error as any; 
-      console.log(err.message);
       
       if (err.error_code === 403) {
         await ctx.reply(ErrorMessages.error);

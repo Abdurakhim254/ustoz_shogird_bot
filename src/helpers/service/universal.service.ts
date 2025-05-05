@@ -9,10 +9,16 @@ export class UniversalService<T extends Document>  {
         this.Repository = Repository;
     }
 
+    async getAll(){
+        return await this.Repository.find({status:false}).sort({timestamp:-1})
+    }
     async create(data: T) {
         return await this.Repository.create({id:v4(),...data});
     }
 
+    async getByid(id:string): Promise<T | null> {
+        return await this.Repository.findOne({ id: id });
+    }
     async delete(id: string) {
         return await this.Repository.deleteOne({ id: id });
     }
