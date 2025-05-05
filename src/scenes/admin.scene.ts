@@ -83,7 +83,10 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     const [action, id, modelType, type] = ctx.callbackQuery.data.toLowerCase().trim().split("_");
     
     const model = modelMap[modelType];
-  
+
+    console.log(action,id,modelType,type);
+    
+
     const universalService = createUniversalService(model);
   
     if (action.startsWith(SomeNeccessaryMessages.accept)) {
