@@ -87,8 +87,8 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
     
   
     const universalService = createUniversalService(model);
-    const post=await universalService.getByid(id)
     if (query.startsWith(SomeNeccessaryMessages.accept)) {
+      const post=await universalService.getByid(id)
       await universalService.update(id);
       await ctx.api.sendMessage(id, SomeNeccessaryMessages.good);
       const format = await formatter.createTemplate(post, type.toUpperCase() as AddType);
