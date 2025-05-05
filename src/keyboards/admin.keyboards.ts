@@ -13,23 +13,16 @@ export const Adminkeyboard = new InlineKeyboard().text(
 
 
 export const giveAddKeyboard = <T extends Document>(id: number, model: Model<T>,type: AddType) => {
-  let modelType: string;
+  let modelType="";
 
-  switch (model.modelName) {
-    case "Job":
-      modelType = "job";
-      break;
-    case "Hodim":
-      modelType = "hodim";
-      break;
-    case "Ustoz":
-      modelType = "ustoz";
-      break;
-    case "Sherik":
-      modelType = "sherik";
-      break;
-    default:
-      modelType = "unknown"; 
+  if(model.modelName=="Job"){
+    modelType="ish"
+  }else if(model.modelName=="Hodim"){
+    modelType="hodim"
+  }else if(model.modelName=="Ustoz"){
+    modelType="ustoz"
+  }else if(model.modelName=="Sherik"){
+    modelType="sherik"
   }
 
   return new InlineKeyboard()
