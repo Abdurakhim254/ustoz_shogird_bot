@@ -32,7 +32,7 @@ const UstozSchema = new mongoose.Schema<IUstoz>(
       type: String,
       required: true,
     },
-    narxi: {
+    narx: {
       type: String,
       required: true,
     },

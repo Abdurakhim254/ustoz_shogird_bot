@@ -28,11 +28,7 @@ const SherikSchema = new mongoose.Schema<ISherik>(
       type: String,
       required: true,
     },
-    narxi: {
-      type: String,
-      required: true,
-    },
-    kasbi: {
+    narx: {
       type: String,
       required: true,
     },
