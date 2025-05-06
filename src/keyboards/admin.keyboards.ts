@@ -12,12 +12,12 @@ export const Adminkeyboard = new InlineKeyboard().text(
 
 
 
-export const giveAddKeyboard = <T extends Document>(id: number, model: Model<T>,type: AddType) => {
-  const modelType = model.modelName.toLowerCase();
+export const giveAddKeyboard = <T extends Document>(id: number, model: Model<T>) => {
+  const modelname = model.modelName.toLowerCase();
 
   return new InlineKeyboard()
-    .text("Tasdiqlash ✅", `tasdiq_${id}_${modelType}_${type}`)
-    .text("Bekor qilish ❌", `bekor_${id}_${modelType}_${type}`)
+    .text("Tasdiqlash ✅", `tasdiq_${id}_${modelname}`)
+    .text("Bekor qilish ❌", `bekor_${id}_${modelname}`)
     .row()
     .text("Asosiy Menyuga qaytish ❌", "back");
 };

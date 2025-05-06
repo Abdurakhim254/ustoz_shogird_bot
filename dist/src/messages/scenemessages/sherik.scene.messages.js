@@ -9,10 +9,6 @@ exports.SherikSceneMessages = {
     Har biriga javob bering. 
     Oxirida agar hammasi to'g'ri bo'lsa, HA tugmasini bosing va arizangiz Adminga yuboriladi.`,
     name: "Ism Familyangizni kiriting ?",
-    age: `🕑 Yosh: 
-
-    Yoshingizni kiriting?
-    Masalan, 19`,
     texnologiya: `📚 Texnologiya:
 
     Talab qilinadigan texnologiyalarni kiriting?
@@ -31,10 +27,6 @@ exports.SherikSceneMessages = {
 
     Tolov qilasizmi yoki Tekinmi?
     Kerak bo'lsa, Summani kiriting?`,
-    kasb: `👨🏻‍💻 Kasbi: 
-
-    Ishlaysizmi yoki o'qiysizmi?
-    Masalan, Talaba`,
     murojaat_vaqti: `🕰 Murojaat qilish vaqti: 
 
     Qaysi vaqtda murojaat qilish mumkin?

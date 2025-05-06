@@ -18,82 +18,127 @@ const keyboards_1 = require("../keyboards");
 const config_1 = require("../config");
 exports.HodimScene = new grammy_scenes_1.Scene("hodim");
 const formatservice = new helpers_1.FormatService();
-const postservice = new helpers_1.PostService();
+const universalService = new helpers_1.UniversalService(utils_1.Hodim);
 exports.HodimScene.step((ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    yield ctx.reply(messages_1.HodimSceneMessages.ariza);
-    yield ctx.reply(messages_1.HodimSceneMessages.name);
-    ctx.scene.resume();
-}));
-exports.HodimScene.wait("get-age").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    ctx.session.name = ctx.message.text;
-    yield ctx.reply(messages_1.HodimSceneMessages.age);
+    var _a;
+    ctx.session.messageIds = [];
+    ctx.session.chatId = (_a = ctx.chat) === null || _a === void 0 ? void 0 : _a.id;
+    var message = yield ctx.reply(messages_1.HodimSceneMessages.ariza);
+    ctx.session.messageIds.push(message.message_id);
+    var message = yield ctx.reply(messages_1.HodimSceneMessages.Idora);
+    ctx.session.messageIds.push(message.message_id);
     ctx.scene.resume();
 }));
 exports.HodimScene.wait("get-texnologiya").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    ctx.session.age = ctx.message.text;
-    yield ctx.reply(messages_1.HodimSceneMessages.texnologiya);
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    ctx.session.idora = ctx.message.text;
+    const message = yield ctx.reply(messages_1.HodimSceneMessages.texnologiya);
+    ctx.session.messageIds.push(message.message_id);
     ctx.scene.resume();
 }));
 exports.HodimScene.wait("get-aloqa").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
     ctx.session.texnologiya = ctx.message.text;
-    yield ctx.reply(messages_1.HodimSceneMessages.aloqa);
+    const message = yield ctx.reply(messages_1.HodimSceneMessages.aloqa);
+    ctx.session.messageIds.push(message.message_id);
     ctx.scene.resume();
-}));
-exports.HodimScene.wait("get-narx").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    if (utils_1.uzbPhoneRegex.test(ctx.message.text) && ctx.message.text) {
-        ctx.session.aloqa = ctx.message.text;
-        yield ctx.reply(messages_1.HodimSceneMessages.narx);
-        ctx.scene.resume();
-    }
-    else {
-        yield ctx.reply(messages_1.HodimSceneMessages.aloqa);
-    }
 }));
 exports.HodimScene.wait("get-hudud").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    ctx.session.narx = ctx.message.text;
-    yield ctx.reply(messages_1.HodimSceneMessages.hudud);
-    ctx.scene.resume();
-}));
-exports.HodimScene.wait("get-kasb").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    if (utils_1.viloyatlar.includes(ctx.message.text.toLowerCase())) {
-        ctx.session.hudud = ctx.message.text;
-        yield ctx.reply(messages_1.HodimSceneMessages.kasb);
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    if (utils_1.uzbPhoneRegex.test(ctx.message.text) && ctx.message.text) {
+        ctx.session.aloqa = ctx.message.text;
+        const message = yield ctx.reply(messages_1.HodimSceneMessages.hudud);
+        ctx.session.messageIds.push(message.message_id);
         ctx.scene.resume();
     }
     else {
-        yield ctx.reply(messages_1.HodimSceneMessages.hudud);
+        const message = yield ctx.reply(messages_1.HodimSceneMessages.aloqa);
+        ctx.session.messageIds.push(message.message_id);
+    }
+}));
+exports.HodimScene.wait("get-masul").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    if (utils_1.viloyatlar.includes(ctx.message.text.toLowerCase())) {
+        ctx.session.hudud = ctx.message.text;
+        const message = yield ctx.reply(messages_1.HodimSceneMessages.masul);
+        ctx.session.messageIds.push(message.message_id);
+        ctx.scene.resume();
+    }
+    else {
+        const message = yield ctx.reply(messages_1.HodimSceneMessages.hudud);
+        ctx.session.messageIds.push(message.message_id);
     }
 }));
 exports.HodimScene.wait("get-murojaat").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    ctx.session.kasb = ctx.message.text;
-    yield ctx.reply(messages_1.HodimSceneMessages.murojaat_vaqti);
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    ctx.session.masul = ctx.message.text;
+    const message = yield ctx.reply(messages_1.HodimSceneMessages.murojaat_vaqti);
+    ctx.session.messageIds.push(message.message_id);
+    ctx.scene.resume();
+}));
+exports.HodimScene.wait("get-ish-vaqti").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    ctx.session.murojaat_vaqti = ctx.message.text;
+    const message = yield ctx.reply(messages_1.HodimSceneMessages.ish_vaqti);
+    ctx.session.messageIds.push(message.message_id);
+    ctx.scene.resume();
+}));
+exports.HodimScene.wait("get-narx").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    ctx.session.ish_vaqti = ctx.message.text;
+    const message = yield ctx.reply(messages_1.HodimSceneMessages.narx);
+    ctx.session.messageIds.push(message.message_id);
     ctx.scene.resume();
 }));
 exports.HodimScene.wait("get-maqsad").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    ctx.session.murojaat_vaqti = ctx.message.text;
-    yield ctx.reply(messages_1.HodimSceneMessages.maqsad);
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    ctx.session.narx = ctx.message.text;
+    const message = yield ctx.reply(messages_1.HodimSceneMessages.qoshimcha);
+    ctx.session.messageIds.push(message.message_id);
     ctx.scene.resume();
 }));
 exports.HodimScene.wait("get-template").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    ctx.session.maqsad = ctx.message.text;
+    var _a;
+    ctx.session.messageIds.push((_a = ctx.msg) === null || _a === void 0 ? void 0 : _a.message_id);
+    ctx.session.qoshimcha = ctx.message.text;
     ctx.session.tag = messages_1.HodimSceneMessages.tag;
     ctx.session.theme = messages_1.HodimSceneMessages.theme;
-    ctx.session.user_id = ctx.message.from.id;
-    const format = yield formatservice.createTemplate(ctx.session);
-    yield ctx.reply(format, {
-        reply_markup: keyboards_1.UniversalKeyboard
-    });
+    ctx.session.user_id = ctx.from.id;
+    const format = yield formatservice.createTemplate(ctx.session, utils_1.AddType.HODIM);
+    if (format) {
+        yield ctx.reply(format, { reply_markup: keyboards_1.UniversalKeyboard });
+    }
     ctx.scene.resume();
 }));
 exports.HodimScene.wait("last-middleware").on("message:text", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const query = ctx.message.text.toLocaleLowerCase();
-    if (query == messages_1.SomeNeccessaryMessages.yes) {
-        yield postservice.createPost(ctx.session);
-        yield ctx.api.sendMessage(config_1.APPLICATION.admin_id, messages_1.SomeNeccessaryMessages.notification);
-        yield ctx.reply(messages_1.SomeNeccessaryMessages.messageGood);
+    yield (0, helpers_1.messageDeleter)(ctx);
+    try {
+        if (query === messages_1.SomeNeccessaryMessages.yes) {
+            yield universalService.create(ctx.session);
+            yield ctx.api.sendMessage(config_1.APPLICATION.admin_id, messages_1.SomeNeccessaryMessages.notification);
+            yield ctx.reply(messages_1.SomeNeccessaryMessages.messageGood);
+        }
+        else if (query === messages_1.SomeNeccessaryMessages.no) {
+            yield ctx.reply(messages_1.SomeNeccessaryMessages.messageBad);
+        }
     }
-    else if (query == messages_1.SomeNeccessaryMessages.no) {
-        ctx.reply(messages_1.SomeNeccessaryMessages.messageBad);
+    catch (error) {
+        const err = error;
+        if (err.error_code === 403) {
+            yield ctx.reply(messages_1.ErrorMessages.error);
+        }
+        else {
+            yield ctx.reply(messages_1.ErrorMessages.error);
+        }
     }
     ctx.scene.exit();
 }));

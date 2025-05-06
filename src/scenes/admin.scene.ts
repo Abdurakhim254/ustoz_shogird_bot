@@ -2,13 +2,12 @@ import {Scene} from "grammy-scenes"
 import { AddType, BotContext, Hodim, Job, Sherik, Ustoz,  } from "../utils"
 import { APPLICATION } from "../config";
 import { AdminSceneMessages, ButtonMessages, SomeNeccessaryMessages } from "../messages";
-import { Adminkeyboard, JobTypeKeyboards,  } from "../keyboards";
-import {  FormatService, UniversalAdminFunction, createUniversalService} from "../helpers";
-import { modelMap } from "../helpers/functions/AdminSceneFunctions/admin.scene.variables";
-
+import { Adminkeyboard, JobTypeKeyboards, giveAddKeyboard,  } from "../keyboards";
+import { FormatService, createUniversalService, modelMap } from "../helpers";
 
 export const Adminscene = new Scene<BotContext>("admin");
-const formatter = new FormatService();
+
+const formatservice=new FormatService()
 
 Adminscene.step(async(ctx)=>{
 
@@ -42,77 +41,116 @@ Adminscene.wait("start").on("callback_query:data", async (ctx) => {
       ctx.scene.resume();
   });
   
-  Adminscene.wait("give-add-by-types").on("callback_query:data", async (ctx) => {
-    const query = ctx.callbackQuery.data.toLowerCase().trim();
-    let model: any | undefined;
-    let type: AddType | undefined;
   
-    switch (query) {
-      case ButtonMessages.ish:
-        model = Job;
-        type = AddType.ISH;
-        break;
-      case ButtonMessages.hodim:
-        model = Hodim;
-        type = AddType.HODIM;
-        break;
-      case ButtonMessages.ustoz:
-        model = Ustoz;
-        type = AddType.USTOZ;
-        break;
-      case ButtonMessages.sherik:
-        model = Sherik;
-        type = AddType.SHERIK;
-        break;
-    }
-    
-    if(query==SomeNeccessaryMessages.back){
-      await ctx.reply(AdminSceneMessages.getMainMenu)
-      return ctx.scene.exit()
+Adminscene.wait("get-add-by-type").on("callback_query:data",async(ctx)=>{
+  const query = ctx.callbackQuery.data.toLowerCase().trim();
+  if(query==SomeNeccessaryMessages.back){
+    await ctx.reply(AdminSceneMessages.getMainMenu)
+    return ctx.scene.exit()
+  }    
 
-    }
+  const queryarr=[ButtonMessages.ish,ButtonMessages.hodim,ButtonMessages.sherik,ButtonMessages.ustoz]
   
-    if (model && type) {
-      await UniversalAdminFunction(ctx, model, type);
-    }
+
+  if(queryarr.includes(query)){
   
-    ctx.scene.resume();
-  });
+  const universalService=createUniversalService(modelMap[query])
+  console.log(query);
   
-  Adminscene.wait("send-to-channel-middleware").on("callback_query:data", async (ctx) => {
-    const [action, id, modelType, type] = ctx.callbackQuery.data.toLowerCase().trim().split("_");
-    
-    const model = modelMap[modelType];
-
-    console.log(modelType);
-        
-
-    const universalService = createUniversalService(model);
-
-    const post=await universalService.getByid(id)
-    
-    const format = await formatter.createTemplate(post, type.toUpperCase() as AddType);
-    console.log(APPLICATION.channel);
-    
-    if (action.startsWith(SomeNeccessaryMessages.accept)) {
-      
-      await universalService.update(id);
-      await ctx.api.sendMessage(id, SomeNeccessaryMessages.good);
-      console.log(format);
-    
-      if(format){
-        await ctx.api.sendMessage(APPLICATION.channel,format);
+  console.log(modelMap[query]);
+  
+  const posts=await universalService.getAll()
+  if(query==ButtonMessages.ish){
+    if(!posts.length){
+      await ctx.reply(AdminSceneMessages.noPosts,{
+        reply_markup:JobTypeKeyboards
+      })
+    }else{
+      for(const post of posts){
+        let format=await formatservice.createTemplate(post,query.toUpperCase() as AddType)
+        if(format){
+          await ctx.reply(format,{
+            reply_markup:giveAddKeyboard(post.id,modelMap[query])
+          })
+        }
       }
-      await ctx.api.sendMessage(APPLICATION.admin_id, SomeNeccessaryMessages.good);
-    } else if (action.startsWith(SomeNeccessaryMessages.reject)) {
-      await universalService.delete(id);
-      await ctx.reply(SomeNeccessaryMessages.ignore);
-    } else if (action.startsWith(SomeNeccessaryMessages.back)) {
-      await ctx.reply(AdminSceneMessages.getMainMenu);
-      return ctx.scene.exit();
     }
-  });
+  }else if(query==ButtonMessages.hodim){
+    if(!posts.length){
+      await ctx.reply(AdminSceneMessages.noPosts,{
+        reply_markup:JobTypeKeyboards
+      })
+    }else{
+      for(const post of posts){
+        let format=await formatservice.createTemplate(post,query.toUpperCase() as AddType)
+        if(format){
+          await ctx.reply(format,{
+            reply_markup:giveAddKeyboard(post.id,modelMap[query])
+          })
+        }
+      }
+    }
 
+  }else if(query==ButtonMessages.sherik){
+    if(!posts.length){
+      await ctx.reply(AdminSceneMessages.noPosts,{
+        reply_markup:JobTypeKeyboards
+      })
+    }else{
+      for(const post of posts){
+        let format=await formatservice.createTemplate(post,query.toUpperCase() as AddType)
+        if(format){
+          await ctx.reply(format,{
+            reply_markup:giveAddKeyboard(post.id,modelMap[query])
+          })
+        }
+      }
+    }
+  }else{
+    if(!posts.length){
+      await ctx.reply(AdminSceneMessages.noPosts,{
+        reply_markup:JobTypeKeyboards
+      })
+    }else{
+      for(const post of posts){
+        let format=await formatservice.createTemplate(post,query.toUpperCase() as AddType)
+        if(format){
+          await ctx.reply(format,{
+            reply_markup:giveAddKeyboard(post.id,modelMap[query])
+          })
+        }
+      }
+    }
 
+  }
 
+  }
 
+  ctx.scene.resume()
+
+})
+
+Adminscene.wait("last-middleware").on("callback_query:data", async (ctx) => {
+  const [action, id, modelName, type] = ctx.callbackQuery.data.toLowerCase().trim().split("_");
+
+  const model = modelMap[modelName];
+  const universalService = createUniversalService(model);
+
+  if (action === SomeNeccessaryMessages.accept) {
+    const post = await universalService.getByid(id);
+    await universalService.update(id);
+    const format = await formatservice.createTemplate(post, type.toUpperCase() as AddType);
+    if (format) {
+      await ctx.api.sendMessage(APPLICATION.channel, format);
+      await ctx.api.sendMessage(APPLICATION.admin_id, SomeNeccessaryMessages.good);
+    }
+  } else if (action === SomeNeccessaryMessages.reject) {
+    await universalService.delete(id);
+    await ctx.reply(SomeNeccessaryMessages.ignore);
+  } else if (action === SomeNeccessaryMessages.back) {
+    await ctx.reply(AdminSceneMessages.getMainMenu);
+    return ctx.scene.exit();
+  }
+
+  ctx.scene.resume();
+});

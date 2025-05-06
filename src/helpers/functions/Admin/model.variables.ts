@@ -5,4 +5,5 @@ export const modelMap: Record<string, any> = {
   hodim: Hodim,
   ustoz: Ustoz,
   sherik: Sherik,
+  
 };

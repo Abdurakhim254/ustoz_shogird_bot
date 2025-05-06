@@ -18,6 +18,6 @@ __exportStar(require("./admin.scene.messages"), exports);
 __exportStar(require("./hodim.scene.messages"), exports);
 __exportStar(require("./ish.scene.messages"), exports);
 __exportStar(require("./sherik.scene.messages"), exports);
-__exportStar(require("./shogird.scene.messages"), exports);
 __exportStar(require("./ustoz.scene.messages"), exports);
 __exportStar(require("./extra.messages"), exports);
+__exportStar(require("./button.messages"), exports);

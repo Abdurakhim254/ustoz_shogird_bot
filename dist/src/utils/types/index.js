@@ -14,4 +14,8 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__exportStar(require("./types.interfaces"), exports);
+__exportStar(require("./hodim.model.type"), exports);
+__exportStar(require("./job.model.type"), exports);
+__exportStar(require("./sherik.model.type"), exports);
+__exportStar(require("./user.model.type"), exports);
+__exportStar(require("./ustoz.model.type"), exports);

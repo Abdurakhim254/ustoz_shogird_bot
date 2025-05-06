@@ -1,36 +1,36 @@
-name: Node.js CD
+# name: Node.js CD
 
-on:
-  push:
-    branches: ['main']
-  pull_request:
-    branches: ['main']
+# on:
+#   push:
+#     branches: ['main']
+#   pull_request:
+#     branches: ['main']
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pem
-          chmod 400 ~/.ssh/id_rsa.pem
+#       - name: Set up SSH key
+#         run: |
+#           mkdir -p ~/.ssh
+#           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa.pem
+#           chmod 400 ~/.ssh/id_rsa.pem
 
-      - name: Add SSH host key to known_hosts
-        run: |
-          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+#       - name: Add SSH host key to known_hosts
+#         run: |
+#           ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy to server
-        run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pem ${{ secrets.USER }}@${{ secrets.HOST }} <<'ENDSSH'
-          cd ${{ secrets.APP_PATH }}
-          git pull origin main
-          rm -rf dist/
-          npx tsc
-          npm i -g pnpm
-          pnpm install
-          pm2 restart dist/index.js --name ustoz_shogird_bot
-          ENDSSH
+#       - name: Deploy to server
+#         run: |
+#           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pem ${{ secrets.USER }}@${{ secrets.HOST }} <<'ENDSSH'
+#           cd ${{ secrets.APP_PATH }}
+#           git pull origin main
+#           rm -rf dist/
+#           npx tsc
+#           npm i -g pnpm
+#           pnpm install
+#           pm2 restart dist/index.js --name ustoz_shogird_bot
+#           ENDSSH

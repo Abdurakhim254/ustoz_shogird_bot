@@ -7,5 +7,4 @@ exports.Jobkeyboard = new grammy_1.InlineKeyboard()
     .text("Ish joyi kerak 🏢", "ish")
     .text("Hodim kerak 🧑🏼‍💻", "hodim")
     .text("Ustoz kerak 👨‍🏫", "ustoz")
-    .row()
-    .text("Shogird kerak 🧑‍⚕️", "shogird");
+    .row();

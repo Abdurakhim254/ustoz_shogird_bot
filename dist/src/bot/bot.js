@@ -14,10 +14,12 @@ const grammy_1 = require("grammy");
 const config_1 = require("../config");
 const helpers_1 = require("../helpers");
 const keyboards_1 = require("../keyboards");
+const utils_1 = require("../utils");
 const scenes_1 = require("../scenes");
 const messages_1 = require("../messages");
 const token = config_1.APPLICATION.token;
 exports.bot = new grammy_1.Bot(token);
+const universalService = new helpers_1.UniversalService(utils_1.User);
 const storage = new grammy_1.MemorySessionStorage();
 exports.bot.use((0, grammy_1.session)({
     initial: () => ({ messageIds: [], __scenes: {} }), // important: include __scenes
@@ -25,12 +27,11 @@ exports.bot.use((0, grammy_1.session)({
 }));
 exports.bot.use(scenes_1.scenes.manager());
 exports.bot.use(scenes_1.scenes);
-const userservice = new helpers_1.UserService();
 exports.bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const id = ctx.from.id;
     ctx.session.messageIds = [];
     ctx.session.chatId = ctx.chat.id;
-    const user = yield userservice.getuser(id);
+    const user = yield universalService.getUser(id);
     if (!user) {
         const message = yield ctx.reply(messages_1.MAIN_MESSAGES.AskContact, { reply_markup: keyboards_1.getcontact });
         ctx.session.messageIds.push(message.message_id);
@@ -43,16 +44,21 @@ exports.bot.command("start", (ctx) => __awaiter(void 0, void 0, void 0, function
     }
 }));
 exports.bot.on("message:contact", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield userservice.getuser(ctx.from.id);
+    const user = yield universalService.getUser(ctx.from.id);
     if (!user) {
-        yield userservice.createuser(ctx.from.id, ctx.message.contact.phone_number, ctx.message.contact.first_name, ctx.message.contact.username);
+        yield universalService.create({
+            user_id: ctx.from.id,
+            phone_number: parseInt(ctx.message.contact.phone_number, 10),
+            first_name: ctx.message.contact.first_name,
+            username: ctx.message.from.username || "",
+        });
     }
     const message = yield ctx.reply(messages_1.MAIN_MESSAGES.SignUpsuccess, {
         reply_markup: keyboards_1.Addpost
     });
     ctx.session.messageIds.push(message.message_id);
 }));
-exports.bot.command("notify", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+exports.bot.command("admin", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     yield ctx.scenes.enter("admin");
 }));
 exports.bot.callbackQuery("addPost", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
@@ -76,8 +82,4 @@ exports.bot.callbackQuery("hodim", (ctx) => __awaiter(void 0, void 0, void 0, fu
 exports.bot.callbackQuery("ustoz", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, helpers_1.messageDeleter)(ctx);
     yield ctx.scenes.enter("ustoz");
-}));
-exports.bot.callbackQuery("shogird", (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, helpers_1.messageDeleter)(ctx);
-    yield ctx.scenes.enter("shogird");
 }));

@@ -15,3 +15,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./main.messages"), exports);
+__exportStar(require("./error.messages"), exports);
+__exportStar(require("./channel.messages"), exports);

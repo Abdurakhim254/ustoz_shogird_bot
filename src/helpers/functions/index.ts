@@ -1,2 +1,2 @@
 export * from "./Global"
-export * from "./AdminSceneFunctions"
+export * from "./Admin"

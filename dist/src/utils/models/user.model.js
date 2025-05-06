@@ -16,4 +16,4 @@ const usersSchema = new mongoose_1.default.Schema({
     username: { type: String, required: false },
 }, { timestamps: true });
 mongoose_1.default.connect(config_1.APPLICATION.url);
-exports.User = mongoose_1.default.model("users", usersSchema);
+exports.User = mongoose_1.default.model("user", usersSchema);
